@@ -1,0 +1,1 @@
+<p class="text-center text-muted mt-md mb-md">© 2017-2018 <a target="_blank" href="geeksntechnology.com">Geeksntechnology Limited.</a> All rights reserved.</p>
