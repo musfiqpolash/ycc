@@ -1,4 +1,4 @@
-<nav id="top-nav" class="navbar navbar-custom">
+<nav id="top-nav" class="navbar navbar-default navbar-white">
     <div class="container">
         <!-- Collect the nav links, forms, and other content for toggling -->
         <ul class="nav navbar-nav">
@@ -7,7 +7,8 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             @if (auth('client')->check())
-            <li><a href="{{url('client/profile')}}">{{auth('client')->user()->first_name}}</a></li>
+            <li><a href="{{url('client/dashboard')}}">My Account</a></li>
+            <li><a href="{{url('client/logout')}}">Logout</a></li>
             @else
             <li><a data-toggle="modal" data-target="#client_signup_modal">Register</a></li>
             <li><a data-toggle="modal" data-target="#client_login_modal">Login</a></li>
@@ -68,20 +69,20 @@
         </div>
     </div>
 </div>
+<div class="container">
 <nav class="navbar navbar-custom">
-    <div class="container">
         <div class="owl-carousel">
-            <a href="#">Cat 1</a>
-            <a href="#">Cat 2</a>
-            <a href="#">Cat 3</a>
-            <a href="#">Cat 4</a>
-            <a href="#">Cat 5</a>
-            <a href="#">Cat 6</a>
-            <a href="#">Cat 7</a>
-            <a href="#">Cat 8</a>
-            <a href="#">Cat 9</a>
-            <a href="#">Cat 10</a>
+            <a class="bold" href="#">Cat 1</a>
+            <a class="bold" href="#">Cat 2</a>
+            <a class="bold" href="#">Cat 3</a>
+            <a class="bold" href="#">Cat 4</a>
+            <a class="bold" href="#">Cat 5</a>
+            <a class="bold" href="#">Cat 6</a>
+            <a class="bold" href="#">Cat 7</a>
+            <a class="bold" href="#">Cat 8</a>
+            <a class="bold" href="#">Cat 9</a>
+            <a class="bold" href="#">Cat 10</a>
 
-        </div>
-</nav>
+        </nav>
+    </div>
 </div>

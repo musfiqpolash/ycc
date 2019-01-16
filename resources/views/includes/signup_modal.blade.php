@@ -6,7 +6,7 @@
                 <h4 class="modal-title">Sign Up</h4>
             </div>
             <div class="modal-body">
-                <form action="{{url('client/create')}}" method="post" id="client_signup_form">
+                <form action="{{url('client/create')}}" method="post" id="client_signup_form" class="modal-form">
                     {{csrf_field()}}
                     <div class="row">
                         <div class="form-group col-md-6">

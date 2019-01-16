@@ -59,6 +59,7 @@
 @include('includes.frontFooterlink')
 @stack('signupJs')
 @stack('loginJs')
+@stack('passwordJs')
 <!--footerlink end-->
 </body>
 </html>

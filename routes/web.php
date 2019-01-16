@@ -35,8 +35,14 @@ Route::group(['prefix' => 'client'], function () {
     Route::get('logout', 'Auth\ClientLoginController@logout');
     Route::post('loginVerify', 'Auth\ClientLoginController@loginVerify');
 
-    Route::get('profile', 'ClientController@showProfile');
     Route::group(['middleware' => ['auth:client']], function () {
+        Route::get('profile', 'ClientController@showProfile')->name('p_profile');
+        Route::get('dashboard', 'ClientController@showDashboard')->name('p_dashboard');
+        Route::get('orders', 'ClientController@showOrders')->name('p_orders');
+        Route::get('order/{id}', 'ClientController@orderDetails')->name('order_details');
+        Route::post('changePasswordRequest', 'ClientController@changePasswordRequest')->name('p_change_password_request');
+        Route::post('changePassword', 'ClientController@changePassword')->name('p_change_password');
+        Route::post('update', 'ClientController@update')->name('p_update');
     });
 });
 Route::post('client/login', 'Auth\ClientLoginController@login');

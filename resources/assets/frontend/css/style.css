@@ -1,6 +1,14 @@
 :root {
-    --nav-color: #247794;
+    --nav-color: #1e4e7d;
     --hover: #DB886B;
+}
+
+.bg-nav {
+    background: var(--nav-color) !important;
+}
+
+.text-white {
+    color: white !important;
 }
 
 #top-nav {
@@ -16,7 +24,18 @@
 .navbar-custom {
     background-color: var(--nav-color);
     border-color: var(--nav-color);
-    border-radius: 0 !important;
+    /* border-radius: 0 !important; */
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.navbar-white {
+    background-color: white;
+    border-radius: 0;
+}
+
+.m-0 {
+    margin: 0;
 }
 
 .navbar-custom a:hover {
@@ -64,7 +83,7 @@ ul.nav li:not(:last-child)::after {
     padding-top: 10px;
     padding-bottom: 30px;
     width: 100%;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
 }
 
 .form-custom:nth-child(1) {
@@ -164,10 +183,8 @@ ul.nav li:not(:last-child)::after {
     padding: 0 15px;
 }
 
-#client_signup_form .form-control,
-#client_login_form .form-control {
+.modal-form .form-control {
     height: 34px;
-    ;
 }
 
 .alerts {
@@ -178,6 +195,57 @@ ul.nav li:not(:last-child)::after {
     z-index: 5;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.bg-green {
+    background: #2ecc71;
+}
+
+.bg-blue {
+    background: #3B5998;
+}
+
+.bg-sky {
+    background: #3498db;
+}
+
+.dash-tab {
+    width: 100%;
+    height: 130px;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.dash-tab i,
+.dash-tab .dash-right {
+    color: white;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.dash-tab .dash-right {
+    text-align: center;
+    font-size: 20px;
+}
+
+.dash-right * {
+    margin: 0;
+}
+
+.number {
+    font-size: 35px;
+}
+
+.dash-tab i {
+    font-size: 75px;
+    margin-right: 8px;
+}
+
 @media (max-width: 500px) {}
 
 @media (min-width: 768px) {
@@ -185,7 +253,7 @@ ul.nav li:not(:last-child)::after {
         padding-top: 20px;
         padding-bottom: 10px;
         width: 100%;
-        border-bottom: 1px solid #ccc;
+        /* border-bottom: 1px solid #ccc; */
     }
 
     #custom-nav-left,
