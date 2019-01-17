@@ -187,6 +187,11 @@ ul.nav li:not(:last-child)::after {
     height: 34px;
 }
 
+.modal-form textarea.form-control {
+    height: 100px;
+    ;
+}
+
 .alerts {
     position: fixed;
     top: 15%;
