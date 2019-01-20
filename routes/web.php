@@ -96,11 +96,18 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth']]], function () {
     Route::get('/order/details/{id}', 'OrderController@details');
     Route::post('/order/delete', 'OrderController@destroy');
 
-    Route::get('/{any}', 'SettingsController@show_info');
+    Route::get('settings/{any}', 'SettingsController@show_info');
     //Route::get('/settings/shipping_info', 'SettingsController@show_info');
     Route::post('/settings/update_info', 'SettingsController@update_info');
     Route::post('/resetPassword', 'ProductController@resetPassword');
 
     Route::view('/create/product', 'backend.pages.product.product_add');
+
+    Route::get('category', 'CategoryController@index');
+    Route::post('category', 'CategoryController@store');
+    Route::post('category/update', 'CategoryController@update');
+    Route::get('category/{id}/sub_category', 'CategoryController@showSubCategory');
+    Route::post('category/{id}/sub_category', 'SubCategoryController@store');
+    Route::post('sub_category/update', 'SubCategoryController@update');
 });
 Auth::routes();

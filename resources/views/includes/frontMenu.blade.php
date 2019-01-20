@@ -46,9 +46,16 @@
                         <div class="input-group">
                             <select name="category" id="category" class="form-control">
                                 <option value="">All Category</option>
-                                <option value="1">Category 1</option>
-                                <option value="2">Category 2</option>
-                                <option value="3">Category 3</option>
+                                @if ($categories)
+                                    @foreach ($categories as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
+                                @else
+                                    
+                                    <option value="">Category 1</option>
+                                    <option value="">Category 2</option>
+                                    <option value="">Category 3</option>
+                                @endif
                             </select>
                             <div class="input-group-addon" style="padding: 4px; border-radius: 0;">
                                 <button type="submit" class="btn"><i class="fa fa-search"></i></button>
@@ -72,6 +79,12 @@
 <div class="container">
 <nav class="navbar navbar-custom">
         <div class="owl-carousel">
+            @if ($categories)
+                @foreach ($categories as $item)
+                <a class="bold" href="#">{{$item->name}}</a>
+                @endforeach
+            @else
+                
             <a class="bold" href="#">Cat 1</a>
             <a class="bold" href="#">Cat 2</a>
             <a class="bold" href="#">Cat 3</a>
@@ -82,6 +95,7 @@
             <a class="bold" href="#">Cat 8</a>
             <a class="bold" href="#">Cat 9</a>
             <a class="bold" href="#">Cat 10</a>
+            @endif
 
         </nav>
     </div>

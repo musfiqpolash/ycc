@@ -23,6 +23,11 @@
 <script src="{{url('resources/assets/backend')}}/javascripts/forms/examples.validation.js"></script>
 
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $(function(){
 
         $('#resetPassword').validate({

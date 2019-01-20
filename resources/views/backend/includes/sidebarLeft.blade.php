@@ -14,11 +14,25 @@
         <div class="nano-content">
             <nav id="menu" class="nav-main" role="navigation">
                 <ul class="nav nav-main">
-                    <li class="nav-active">
+                    <li class="nav">
                         <a href="{{url('admin')}}">
                             <i class="fa fa-dashboard" aria-hidden="true"></i>
                             <span>Dashboard</span>
                         </a>
+                    </li>
+                    <li class="nav-parent">
+                        <a>
+                            <i class="fa fa-th" aria-hidden="true"></i>
+                            <span>Product Category</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="{{url('admin/category')}}">
+                                    Product Categories
+                                </a>
+                            </li>
+
+                        </ul>
                     </li>
                     <li class="nav-parent">
                         <a>
@@ -63,7 +77,7 @@
 
                         </ul>
                     </li>
-                    <li class="nav-active">
+                    <li class="nav">
                         <a href="{{url('admin/order/list')}}">
                             <i class="fa fa-list" aria-hidden="true"></i>
                             <span>Order List</span>
@@ -77,12 +91,12 @@
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a href="{{url('admin/return_policy')}}">
+                                <a href="{{url('admin/settings/return_policy')}}">
                                     Return Policy
                                 </a>
                             </li>
                             <li>
-                                <a href="{{url('admin/shipping_info')}}">
+                                <a href="{{url('admin/settings/shipping_info')}}">
                                     Shipping Info
                                 </a>
                             </li>
@@ -90,7 +104,7 @@
                         </ul>
                     </li>
                     <hr class="sperator">
-                    <li class="nav-active">
+                    <li class="nav">
                         <a href="{{url('/')}}" target="_blank">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             <span>Website</span>
