@@ -22,7 +22,7 @@
     <section class="panel">
         <header class="panel-heading">
             <h2 class="panel-title">{{$page_data->name}}
-                <p class="panel-subtitle">{{$page_data->category}}</p></h2>
+                <p class="panel-subtitle">{{$page_data->hasCategory->name}}</p></h2>
         </header>
         <div class="panel-body">
             @include('includes.flashMessage')
@@ -36,7 +36,7 @@
                                 </header>
                                 <div class="panel-body">
                                     <div class="row">
-                                        @if($page_data->is_accessories==1)
+                                        {{-- @if($page_data->is_accessories==1)
                                             <div class="col-xs-4 text-center">
                                                 <b>COLOR</b><br><label
                                                         class="label label-primary">{{$page_data->color}}</label>
@@ -50,15 +50,15 @@
                                                         class="label label-primary">{{$page_data->quantity}}</label>
                                             </div>
                                         @else
-                                            <div class="col-xs-6">
-                                                <b>COLOR</b><br><label
-                                                        class="label label-primary">{{$page_data->color}}</label>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <b>STOCK</b><br><label
-                                                        class="label label-primary">{{$page_data->quantity}}</label>
-                                            </div>
-                                        @endif
+                                        @endif --}}
+                                        <div class="col-xs-6">
+                                            <b>COLOR</b><br><label
+                                                    class="label label-primary">{{$page_data->color}}</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <b>STOCK</b><br><label
+                                                    class="label label-primary">{{$page_data->quantity}}</label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -99,7 +99,7 @@
 
                             </div>
                         </div>
-                        @if($page_data->is_accessories==1)
+                        {{-- @if($page_data->is_accessories==1)
                             <div class="col-xs-12">
                                 <div class="panel panel-info" style="border: 1px solid #bce8f1 !important;">
                                     <header class="panel-heading">
@@ -131,7 +131,7 @@
 
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
                 <div class="col-md-6">

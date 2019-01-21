@@ -4,6 +4,27 @@
 
 @section('content')
 
+{{-- sliders --}}
+<div class="container">
+    <div class="slider owl-carousel owl-theme">
+        <div class="slider-item">
+            <img src="https://via.placeholder.com/1024x350" alt="C/O https://placeholder.com/">
+        </div>
+        <div class="slider-item">
+            <img src="https://via.placeholder.com/1024x350" alt="C/O https://placeholder.com/">
+        </div>
+        <div class="slider-item">
+            <img src="https://via.placeholder.com/1024x350" alt="C/O https://placeholder.com/">
+        </div>
+        <div class="slider-item">
+            <img src="https://via.placeholder.com/1024x350" alt="C/O https://placeholder.com/">
+        </div>
+        <div class="slider-item">
+            <img src="https://via.placeholder.com/1024x350" alt="C/O https://placeholder.com/">
+        </div>
+    </div>
+</div>
+{{-- sliders end --}}
 
         <!--product container-->
 <div class="container sspImg">
@@ -23,8 +44,7 @@
 
 
                         <div class="textBox text-center">
-                            <a href="{{url(str_replace(' ','_',$val[0]->name).'/details/'.$val[0]->group_name)}}">QUICK
-                                VIEW</a>
+                            <a href="{{url(str_replace(' ','_',$val[0]->name).'/details/'.$val[0]->group_name)}}">VIEW</a>
                         </div>
                         @if($val[0]->label!='')
                             <div class="textBoxTop {{$val[0]->label_css}}">
@@ -54,60 +74,6 @@
     </div>
 </div>
 <!--product container end-->
-
-<!--accessories-->
-<div class="container sspImg">
-    <div class="row" id="backup2">
-        @foreach($accessories as $key=>$val)
-            <a href="{{url(str_replace(' ','_',$val[0]->name).'/details/'.$val[0]->group_name)}}">
-                <div class="col-md-3 col-xs-6 imageBox leave_img">
-                    <div class="imageBox box leave_img">
-                         <div class="loader"></div>
-                        <img id="prdct{{$val[0]->id}}" class="img-thumbnail leave_img"
-                             src="{{url('public/uploads/assets/frontend/images/products/')}}/{{$val[0]->main_image}}"
-                             @if(sizeof($val)>=2)
-                             onmouseover="this.src='{{url('public/uploads/assets/frontend/images/products/')}}/{{$val[1]->main_image}}'"
-                             onmouseout="this.src='{{url('public/uploads/assets/frontend/images/products/')}}/{{$val[0]->main_image}}'"
-                             @endif
-                             alt="1">
-
-
-                        <div class="textBox text-center">
-                            <a href="{{url(str_replace(' ','_',$val[0]->name).'/details/'.$val[0]->group_name)}}">QUICK
-                                VIEW</a>
-                        </div>
-                        @if($val[0]->label!='')
-                            <div class="textBoxTop {{$val[0]->label_css}}">
-                                <p>{{$val[0]->label}}</p>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="sspText">
-                        <div class="txtUpper">
-                            <p>{{$val[0]->name}}</p>
-                        </div>
-                        <hr>
-                        <div class="txtLower">
-                            <p>
-                            @if($val[0]->quantity==0)
-                                <p class="colorOut">Out Of Stock</p>
-                            @else
-                                @if($val[0]->is_discount==1)
-                                    <i>${{$val[0]->hasSinglePrice->price}} </i>&nbsp;
-                                    ${{$val[0]->discount_price}}
-                                @else
-                                    ${{$val[0]->hasSinglePrice->price}}
-								@endif
-                            @endif
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        @endforeach
-    </div>
-</div>
-<!--accessories end-->
 @endsection
 
 @section('customJs')
@@ -170,6 +136,14 @@
             $('#'+id).attr('src', src);
         }
 
-
+        $('.slider').owlCarousel({
+            margin:10,
+            loop:true,
+            items:1,
+            autoplay:true,
+            autoplayTimeout:3000,
+            autoplayHoverPause:true,
+            animateOut: 'fadeOut'
+        })
     </script>
 @endsection

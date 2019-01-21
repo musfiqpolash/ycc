@@ -28,7 +28,7 @@
     });
     var baseUrl=$('#base_url').val();
 
-    var owl = $('.owl-carousel');
+    var owl = $('#menu-owl');
     owl.owlCarousel({
         // loop:true,
         autoWidth:true,
@@ -46,8 +46,8 @@
     $(window).resize(fixOwlMargin)
 
     function fixOwlMargin(){
-        $outer=$('.owl-stage-outer');
-        $inner=$('.owl-stage');
+        $outer=$('#menu-owl .owl-stage-outer');
+        $inner=$('#menu-owl .owl-stage');
         if ($outer.width()>$inner.width()) {
             let len= $outer.width()-$inner.width();
             $inner.css({'margin-left':len/2})

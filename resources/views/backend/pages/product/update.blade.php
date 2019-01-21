@@ -52,7 +52,7 @@
                     @include('includes.flashMessage')
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="product_name" class=""><b>Product Name</b></label>
                         <div>
 								<input required readonly type="text" class="form-control" id="product_name"
@@ -65,46 +65,55 @@
                     <div class="form-group col-md-6">
                         <label for="product_category" class=""><b>Product Category</b></label>
                         <div>
-								<input required readonly type="text" class="form-control" id="product_category"
-									   name="product_category"
-									   value="{{$product->category}}">
+								<select id="product_category" name="product_category" class="form-control" required>
+										<option value="{{$product->hasCategory->id}}" selected>{{$product->hasCategory->name}}</option>
+									</select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="product_sub_category" class=""><b>Product Sub Category</b></label>
+                        <div>
+								<select id="product_sub_category" name="product_sub_category" class="form-control" required>
+										<option value="{{$product->hasSubCategory->id}}" selected>{{$product->hasSubCategory->name}}</option>
+									</select>
                         </div>
                     </div>
                 </div>
-                <div class="">
+                <div style="margin-top:2rem;">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped mb-none" id="example">
                             <thead>
                             <tr>
-                                <th>Condition</th>
+                                {{-- <th>Condition</th> --}}
                                 <th>Memory</th>
                                 <th>Color</th>
                                 <th>Price</th>
                                 <th>Stock</th>
                                 <th>Label</th>
-                                <th>Carrier</th>
+                                {{-- <th>Carrier</th> --}}
 								<th>Description</th>
                             </tr>
                             </thead>
                             <tbody id="append_row">
                             <tr id="row_0">
-                                <td style="width: 12%">
+                                {{-- <td style="width: 12%">
                                     <select name="condition" id="condition_0" class="form-control">
                                         <option @if($product->product_condition=='GRADE A')selected @endif value="GRADE A">GRADE A</option>
                                         <option @if($product->product_condition=='GRADE B')selected @endif value="GRADE B">GRADE B</option>
                                         <option @if($product->product_condition=='GRADE C')selected @endif value="GRADE C">GRADE C</option>
                                     </select>
+                                </td> --}}
+                                <td style="width: 20%;">
+                                    <input type="text" name="memory" value="{{$product->size}}" id="memory_0" placeholder="Size" class="form-control">
                                 </td>
-                                <td style="width: 8%;">
-                                    <input type="text" name="memory" value="{{$product->size}}" id="memory_0" placeholder="Memory" class="form-control">
+                                <td style="width: 20%">
+									<input onkeypress="return forColor(event)" type="text" name="color" value="{{$product->color}}" id="color_0" placeholder="Color" class="form-control">
+                                    {{-- <input type="text" name="memory" value="{{$product->size}}"  placeholder="Memory" class="form-control" style="display: none;"> --}}
+                                    <input type="text" name="condition" value="{{$product->product_condition}}"  placeholder="product_condition" class="form-control" style="display: none;">
                                 </td>
-                                <td style="width: 12%">
-                                    <input onkeypress="return forColor(event)" type="text" name="color" value="{{$product->color}}" id="color_0" placeholder="Color" class="form-control">
-                                </td>
-                                <td style="width: 10%" align="center">
-                                    <a role="button" onclick="openPriceModal(0)" class="label label-primary price_a_0">Add</a>
-                                </td>
-                                <td style="width: 10%">
+                                <td style="width: 20%">
+									<input type="text" name="price[0][]" value="{{$product->hasPrice[0]->price}}" id="price_0" placeholder="Color" class="form-control">
+                                <td style="width: 20%">
                                     <input type="tel" onkeypress="return onlyNumber(event)" name="stock" value="{{$product->quantity}}" id="stock_0" placeholder="Stock" class="form-control">
                                 </td>
                                 <td style="width: 15%">
@@ -114,9 +123,9 @@
                                         <option value="NEW">NEW</option>
                                     </select>
                                 </td>
-                                <td align="center">
+                                {{-- <td align="center">
                                     <a role="button" onclick="openCarrierModal(0)" class="label label-primary carrier_a_0">Add</a>
-                                </td>
+                                </td> --}}
 								<td align="center">
 									<a role="button" onclick="openDescriptionModal(0)" class="label label-primary desc_a_0">Add</a>
 								</td>
@@ -151,7 +160,7 @@
 			</div>
 		</section>
 		{{--modals--}}
-        <div id="price_modal_div">
+        {{-- <div id="price_modal_div">
 			<div id="price_modal_0" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
 				<div class="modal-dialog">
 					<!-- Modal content-->
@@ -206,7 +215,7 @@
 
 				</div>
 			</div>
-		</div>
+		</div> --}}
 
 		<div id="carrier_modal_div">
 			<div id="carrier_modal_0" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">

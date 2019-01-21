@@ -29,4 +29,14 @@ class Product extends Model
             ->where('min_quantity', 1)
             ->where('max_quantity', 1);
     }
+
+    public function hasCategory()
+    {
+        return $this->belongsTo('App\Category', 'category');
+    }
+
+    public function hasSubCategory()
+    {
+        return $this->belongsTo('App\SubCategory', 'sub_category_id');
+    }
 }

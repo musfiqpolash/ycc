@@ -104,4 +104,10 @@ class CategoryController extends Controller
         $category=Category::with('subCategory')->findOrFail($id);
         return view('backend.pages.category.subcategory', compact('category'));
     }
+    public function getSubCategory($id)
+    {
+        $category=Category::with('subCategory')->findOrFail($id);
+
+        return response()->json($category, 200);
+    }
 }

@@ -78,7 +78,7 @@
 </div>
 <div class="container">
 <nav class="navbar navbar-custom">
-        <div class="owl-carousel">
+        <div id="menu-owl" class="owl-carousel">
             @if ($categories)
                 @foreach ($categories as $item)
                 <a class="bold" href="#">{{$item->name}}</a>

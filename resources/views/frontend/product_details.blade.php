@@ -131,7 +131,7 @@
                     <form id="addToCartForm" action="{{url('/addToCart')}}">
                         <!--condition start-->
                         <div class="form-group">
-                            <label for="condition" style="margin-top:0px; margin-bottom: 2px;"><span class="f-w-light">Condition: </span><span
+                            {{-- <label for="condition" style="margin-top:0px; margin-bottom: 2px;"><span class="f-w-light">Condition: </span><span
                                         id="gradeValueLabel">{{$activeGrade}}</span></label><br>
                             <div id="gradeValueDiv">
                                 @foreach($condList as $key=> $val)
@@ -186,13 +186,13 @@
                                                 style="font-size: 25px; font-weight: 700;">{{explode(' ',$val)[1]}}</span>
                                     </label>
                                 @endforeach
-                            </div>
+                            </div> --}}
                         </div>
                         <!--condition end-->
 
                         <!--size start-->
                         <div class="form-group">
-                            <label for="size" style=" margin-bottom: 2px;"><span class="f-w-light">Memory: </span><span
+                            <label for="size" style=" margin-bottom: 2px;"><span class="f-w-light">Size: </span><span
                                         id="sizeValueLabel">{{$activeSize}}</span></label><br>
                             <div id="sizeValueDiv">
                                 @foreach($sizeList as $key=> $val)
@@ -224,7 +224,7 @@
                         <!--color end-->
 
                         <!--price start-->
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="wholesale" style=" margin-bottom: 2px;"><span
                                         class="f-w-light">Wholesale Price (Piece):</span><span
                                         id="priceValuelabel">  ${{$prdctInfo[0]->hasSinglePrice->price}}</span></label><br>
@@ -232,7 +232,7 @@
                                 @include('includes.wholesale',['priceInfo'=>$prdctInfo[0]->hasPriceList,'qty'=>1])
                             </div>
 
-                        </div>
+                        </div> --}}
                         <!--price end-->
 
 

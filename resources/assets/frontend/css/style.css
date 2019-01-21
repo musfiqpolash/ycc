@@ -141,12 +141,12 @@ ul.nav li:not(:last-child)::after {
     color: var(--hover);
 }
 
-.owl-carousel {
+#menu-owl.owl-carousel {
     padding: 15px;
 }
 
 
-.owl-item:not(:last-child)::after {
+#menu-owl .owl-item:not(:last-child)::after {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -155,30 +155,30 @@ ul.nav li:not(:last-child)::after {
     content: '';
 }
 
-.owl-nav {
+#menu-owl .owl-nav {
     position: relative;
 }
 
-.owl-prev,
-.owl-next {
+#menu-owl .owl-prev,
+#menu-owl .owl-next {
     position: absolute;
     top: -25px;
     font-size: 2rem !important;
 }
 
-.owl-prev {
+#menu-owl .owl-prev {
     left: -16px;
 }
 
-.owl-next {
+#menu-owl .owl-next {
     right: -16px;
 }
 
-.owl-dots {
+#menu-owl .owl-dots {
     display: none;
 }
 
-.owl-item a {
+#menu-owl .owl-item a {
     text-decoration: none;
     padding: 0 15px;
 }

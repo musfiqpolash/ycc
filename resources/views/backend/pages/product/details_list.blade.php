@@ -22,7 +22,7 @@
     <section class="panel">
         <header class="panel-heading">
             <h2 class="panel-title">{{$page_data[0]->name}}
-                <p class="panel-subtitle">{{$page_data[0]->category}}</p></h2>
+                <p class="panel-subtitle">{{$page_data[0]->hasCategory->name}}</p></h2>
         </header>
         <div class="panel-body">
 			<div class="row">
@@ -37,9 +37,9 @@
 					<tr>
 						<th>#</th>
 						<th>Image</th>
-						<th>condition</th>
+						{{-- <th>condition</th> --}}
 						<th>Price</th>
-						<th>size</th>
+						{{-- <th>size</th> --}}
 						<th>color</th>
 						<th>quantity</th>
 						<th>action</th>
@@ -50,9 +50,9 @@
 						<tr>
 							<td class="text-center">{{($k+1)}}</td>
 							<td class="text-center"><img style="width: 30px; height: auto;" src="{{url('public/uploads/assets/frontend/images/products/'.$val->main_image)}}" alt="p_img_{{$k}}"></td>
-							<td class="text-center">{{$val->product_condition}}</td>
+							{{-- <td class="text-center">{{$val->product_condition}}</td> --}}
 							<td><label class="label label-primary">${{$val->hasPrice[0]->price}}</label></td>
-							<td><label class="label label-primary">{{$val->size}}</label></td>
+							{{-- <td><label class="label label-primary">{{$val->size}}</label></td> --}}
 							<td><label class="label label-primary">{{$val->color}}</label></td>
 							<td><label class="label label-primary">{{$val->quantity}}</label></td>
 							<td class="text-center">

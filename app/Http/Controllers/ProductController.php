@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function create($type, $p_group = null)
     {
         if ($p_group) {
-            $product = Product::where('group_name', $p_group)->select('name', 'group_name', 'category')->firstOrFail();
+            $product = Product::where('group_name', $p_group)->select('name', 'group_name', 'category', 'sub_category_id')->firstOrFail();
             //dd($product);
             $data['product'] = $product;
         }
@@ -45,14 +45,12 @@ class ProductController extends Controller
         } else {
             return redirect('page_not_found');
         }
-
-
     }
 
     protected function insert_product(Request $r)
     {
-        //dd($r->all());
-//				dd($r->image[0]->extension());
+        // dd($r->all());
+        //				dd($r->image[0]->extension());
         if ($r->has('group_name')) {
             $t_grp = $r->input('group_name');
         } else {
@@ -76,8 +74,8 @@ class ProductController extends Controller
         $description = $r->input('description');
 
         $cur_price = $price[0];
-        $cur_min_qu = $min_quantity[0];
-        $cur_max_qu = $max_quantity[0];
+        $cur_min_qu = 1;
+        $cur_max_qu = 1;
 
         $cur_img = $r->image[0];
 
@@ -98,6 +96,7 @@ class ProductController extends Controller
             $p->product_condition = $condition[$k];
             $p->group_name = $t_grp;
             $p->category = $r->input('product_category');
+            $p->sub_category_id = $r->input('product_sub_category');
             $p->is_accessories = $r->input('is_accessories');
             $p->p_code = $t_pcode;
 
@@ -122,7 +121,9 @@ class ProductController extends Controller
                     $c_dtls[$kk]['description'] = $cur_c_desc[$kk];
                 }
             }
-            if (isset($c_dtls) && !empty($c_dtls)) $p->carrier_details = json_encode($c_dtls);
+            if (isset($c_dtls) && !empty($c_dtls)) {
+                $p->carrier_details = json_encode($c_dtls);
+            }
 
             $p->is_discount = 0;
             $p->discount_price = 0;
@@ -150,15 +151,15 @@ class ProductController extends Controller
             if ($r->same_price && !empty($r->same_price[$k])) {
             } else {
                 $cur_price = $price[$k];
-                $cur_min_qu = $min_quantity[$k];
-                $cur_max_qu = $max_quantity[$k];
+                $cur_min_qu = 1;
+                $cur_max_qu = 1;
             }
 
             foreach ($cur_price as $j => $jj) {
                 $p_price = new ProductPrice();
                 $p_price->product_id = $currId;
-                $p_price->min_quantity = $cur_min_qu[$j];
-                $p_price->max_quantity = $cur_max_qu[$j];
+                $p_price->min_quantity = 1;
+                $p_price->max_quantity = 1;
                 $p_price->price = $cur_price[$j];
                 $p_price->save();
             }
@@ -173,8 +174,8 @@ class ProductController extends Controller
                 $imgName = 'main_image_' . $currId . '_' . $f . '.' . $cur_img[$f]->getClientOriginalExtension();
                 $image = Image::make($cur_img[$f]);
                 $image->fit(263, 390, function ($constraint) {
-                            $constraint->upsize();
-                        });
+                    $constraint->upsize();
+                });
                 Storage::disk('public_uploads')->put($imgName, (string)$image->encode());
                 if ($img_count == 0) {
                     $p->main_image = $imgName;
@@ -210,7 +211,6 @@ class ProductController extends Controller
 
                 $img_count++;
             }
-
         }
         return redirect('admin/');
     }
@@ -264,8 +264,11 @@ class ProductController extends Controller
                 }
             }
 
-            if (isset($c_dtls) && !empty($c_dtls)) $product->carrier_details = json_encode($c_dtls);
-            else $product->carrier_details = null;
+            if (isset($c_dtls) && !empty($c_dtls)) {
+                $product->carrier_details = json_encode($c_dtls);
+            } else {
+                $product->carrier_details = null;
+            }
 
             $product->description = $r->input('description');
             $product->save();
@@ -278,18 +281,16 @@ class ProductController extends Controller
             foreach ($price[0] as $j => $jj) {
                 $p_price = new ProductPrice();
                 $p_price->product_id = $product->id;
-                $p_price->min_quantity = $min[0][$j];
-                $p_price->max_quantity = $max[0][$j];
+                $p_price->min_quantity = 1;
+                $p_price->max_quantity = 1;
                 $p_price->price = $price[0][$j];
                 $p_price->save();
             }
 
             return redirect('admin/product/details/' . $product->group_name . '/' . $product->is_accessories)->with('success', 'Product Updated');
-
         } else {
             return back()->with('error', 'Product not found');
         }
-
     }
 
     protected function change_image(Request $r)
@@ -306,8 +307,8 @@ class ProductController extends Controller
         $imgName = $i1[0] . '.' . $image->getClientOriginalExtension();
         $image0 = Image::make($image);
         $image0->fit(263, 390, function ($constraint) {
-                    $constraint->upsize();
-                });
+            $constraint->upsize();
+        });
         Storage::disk('public_uploads')->put($imgName, (string)$image0->encode());
 
         $thum_img = $i2[0] . '.' . $image->getClientOriginalExtension();
@@ -352,8 +353,8 @@ class ProductController extends Controller
             $imgName = 'main_image_' . $id . '_' . $count . '.' . $image->getClientOriginalExtension();
             $image0 = Image::make($image);
             $image0->fit(263, 390, function ($constraint) {
-                        $constraint->upsize();
-                    });
+                $constraint->upsize();
+            });
             Storage::disk('public_uploads')->put($imgName, (string)$image0->encode());
 
             $thum_img = 'thum_image_' . $id . '_' . $count . '.' . $image->getClientOriginalExtension();
@@ -471,7 +472,6 @@ class ProductController extends Controller
                 } else {
                     $totalErr[$ttl_cuntr++] = 'Err (' + $imageName + ')';
                 }
-
             }
 
             //details thum
@@ -521,7 +521,6 @@ class ProductController extends Controller
                 }
                 //}
             }
-
         }
         return redirect('admin/product/list/' . $tmpAcc)->with('warning', $totalErr);
     }
@@ -596,7 +595,6 @@ class ProductController extends Controller
                 } else {
                     $totalErr[$ttl_cuntr++] = 'Err (' + $imageName + ')';
                 }
-
             }
 
             //details thum
@@ -646,7 +644,6 @@ class ProductController extends Controller
                 }
                 //}
             }
-
         }
         return back()->with('warning', $totalErr);
     }
@@ -807,7 +804,6 @@ class ProductController extends Controller
             } else {
                 $totalErr[$ttl_cuntr++] = 'Err (' + $imageName + ')';
             }
-
         }
 
         //details thum
@@ -859,7 +855,11 @@ class ProductController extends Controller
     public function get_info()
     {
         $tmp = Product::where('name', $_GET['name'])->get(['group_name']);
-        if ($tmp->count()) $a = 'present'; else $a = 'absent';
+        if ($tmp->count()) {
+            $a = 'present';
+        } else {
+            $a = 'absent';
+        }
         return $a;
     }
 
@@ -874,4 +874,3 @@ class ProductController extends Controller
         return back()->with('success', 'Password Changed');
     }
 }
-	

@@ -28,7 +28,7 @@
                     <th style="width: 18%">NAME</th>
                     <th>CATEGORY</th>
 					@if($access===1)
-                    <th>SIZE</th>
+                    {{-- <th>SIZE</th> --}}
 					@endif
                     <th>COLOR</th>
                     <th>QTY</th>
@@ -45,17 +45,17 @@
                                  src="{{url('public/uploads/assets/frontend/images/products/'.$val[0]->main_image)}}"
                                  alt="{{$val[0]->main_image}}">
                         </td>
-                        <td class="text-left" style="width: 18%">{{$val[0]->name}}</td>
-                        <td>{{$val[0]->category}}</td>
+                        <td class="text-left" style="width: 28%">{{$val[0]->name}}</td>
+                        <td>{{$val[0]->hasCategory->name}}</td>
 						@if($access===1)
-                        <td>
+                        {{-- <td>
                             <div style="word-wrap: break-word;">
                                 @php $size=$val->groupBy('size'); @endphp
                                 @foreach($size as $k_size=>$s)
                                     <span style="display: inline-block" class="label label-primary">{{$k_size}}</span>&nbsp;
                                 @endforeach
                             </div>
-                        </td>
+                        </td> --}}
 						@endif
                         <td>
                             <div style="word-wrap: break-word;">

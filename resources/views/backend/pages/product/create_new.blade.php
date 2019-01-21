@@ -53,7 +53,7 @@
                     @include('includes.flashMessage')
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="product_name" class=""><b>Product Name</b></label>
                         <div>
                             @if(!empty($product) && isset($product))
@@ -71,34 +71,56 @@
                     <div class="form-group col-md-6">
                         <label for="product_category" class=""><b>Product Category</b></label>
                         <div>
-							@if(!empty($product) && isset($product))
-								<input required readonly type="text" class="form-control" id="product_category"
+                            @if(!empty($product) && isset($product))
+                                <select id="product_category" name="product_category" class="form-control" required>
+                                    <option value="{{$product->hasCategory->id}}" selected>{{$product->hasCategory->name}}</option>
+                                </select>
+								{{-- <input required readonly type="text" class="form-control" id="product_category"
 									   name="product_category"
-									   value="{{$product->category}}">
+									   value="{{$product->hasCategory->name}}"> --}}
 							@else
-								<select id="product_category" name="product_category" class="form-control" required>
-									<option value="">select Category</option>
-									<option value="iphone" selected>Apple</option>
-									<option value="samsung">Samsung</option>
+								<select id="product_category" onchange="getSubCategory(this)" name="product_category" class="form-control" required>
+                                    @if ($categories)
+                                        <option value="">select Category</option>
+                                        @foreach ($categories as $item)
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="">No Category Found</option>
+                                    @endif
+								</select>
+							@endif
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="product_sub_category" class=""><b>Product Sub-Category</b></label>
+                        <div>
+                            @if(!empty($product) && isset($product))
+                                <select id="product_sub_category" name="product_sub_category" class="form-control" required>
+                                    <option value="{{$product->hasSubCategory->id}}" selected>{{$product->hasSubCategory->name}}</option>
+                                </select>
+							@else
+								<select id="product_sub_category" name="product_sub_category" class="form-control" required>
+                                    <option value="">select a Category First</option>
 								</select>
 							@endif
                         </div>
                     </div>
                 </div>
-                <div class="">
+                <div style="margin-top: 2rem;">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped mb-none" id="example">
                             <thead>
                             <tr>
                                 <th></th>
-                                <th>Condition</th>
-                                <th>Memory</th>
+                                {{-- <th>Condition</th> --}}
+                                <th>Size</th>
                                 <th>Color</th>
                                 <th>Price</th>
                                 <th>Stock</th>
                                 <th>Label</th>
                                 <th>Image</th>
-                                <th>Carrier</th>
+                                {{-- <th>Carrier</th> --}}
 								<th>Description</th>
                             </tr>
                             </thead>
@@ -107,23 +129,25 @@
                                 <td class="text-center" style="width: 5%">
                                     <a role="button" onclick="appendRow()" class="label label-primary"><i class="fa fa-plus"></i></a>
                                 </td>
-                                <td style="width: 12%">
+                                {{-- <td style="width: 12%">
                                     <select name="condition[0]" id="condition_0" class="form-control">
                                         <option value="GRADE A">GRADE A</option>
                                         <option value="GRADE B">GRADE B</option>
                                         <option value="GRADE C">GRADE C</option>
                                     </select>
+                                </td> --}}
+                                <td style="width: 15%;">
+                                    <input type="text" name="memory[0]" id="memory_0" placeholder="Size" class="form-control">
                                 </td>
-                                <td style="width: 8%;">
-                                    <input type="text" name="memory[0]" id="memory_0" placeholder="Memory" class="form-control">
-                                </td>
-                                <td style="width: 12%">
+                                <td style="width: 15%">
                                     <input onkeypress="return forColor(event)" type="text" name="color[0]" id="color_0" placeholder="Color" class="form-control">
+                                    <input type="text" name="condition[]" value="GRADE A" style="display:none;" placeholder="condition" class="form-control">
                                 </td>
-                                <td style="width: 10%" align="center">
-                                    <a role="button" onclick="openPriceModal(0)" class="label label-primary price_a_0">Add</a>
+                                <td style="width: 15%">
+                                    <input type="text" name="price[0][]" id="price_0" placeholder="Price" class="form-control">
+                                    {{-- <a role="button" onclick="openPriceModal(0)" class="label label-primary price_a_0">Add</a> --}}
                                 </td>
-                                <td style="width: 10%">
+                                <td style="width: 15%">
                                     <input type="tel" onkeypress="return onlyNumber(event)" name="stock[0]" id="stock_0" placeholder="Stock" class="form-control">
                                 </td>
                                 <td style="width: 15%">
@@ -136,9 +160,9 @@
                                 <td align="center">
                                     <a role="button" onclick="openImageModal(0)" class="label label-primary image_a_0">Add</a>
                                 </td>
-                                <td align="center">
+                                {{-- <td align="center">
                                     <a role="button" onclick="openCarrierModal(0)" class="label label-primary carrier_a_0">Add</a>
-                                </td>
+                                </td> --}}
 								<td align="center">
 									<a role="button" onclick="openDescriptionModal(0)" class="label label-primary desc_a_0">Add</a>
 								</td>
@@ -156,7 +180,7 @@
 			</div>
 		</section>
 		{{--modals--}}
-        <div id="price_modal_div">
+        {{-- <div id="price_modal_div">
 			<div id="price_modal_0" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
 				<div class="modal-dialog">
 					<!-- Modal content-->
@@ -191,7 +215,7 @@
 
 				</div>
 			</div>
-		</div>
+		</div> --}}
 		<div id="image_modal_div">
 			<div id="image_modal_0" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
 				<div class="modal-dialog">
@@ -296,27 +320,19 @@
                                 <td class="text-center" style="width: 5%">
                                     <a role="button" onclick="removeRow(${i})" class="label label-danger"><i class="fa fa-times"></i></a>
                                 </td>
-                                <td style="width: 12%">
-                                    <select name="condition[${i}]" id="condition_${i}" class="form-control">
-                                        <option value="GRADE A">GRADE A</option>
-                                        <option value="GRADE B">GRADE B</option>
-                                        <option value="GRADE C">GRADE C</option>
-                                    </select>
-                                </td>
-                                <td style="width: 8%;">
+
+                                <td style="width: 15%;">
                                     <input type="text" name="memory[${i}]" id="memory_${i}" placeholder="Memory" class="form-control">
                                 </td>
-                                <td style="width: 12%">
+                                
+                                <td style="width: 15%">
                                     <input onkeypress="return forColor(event)" type="text" name="color[${i}]" id="color_${i}" placeholder="Color" class="form-control">
+                                    <input type="text" name="condition[]" value="GRADE A" placeholder="condition" class="form-control" style="display:none;">
                                 </td>
-                                <td style="width: 10%" align="center">
-                                    <a role="button" onclick="openPriceModal(${i})" class="label label-primary price_a_${i}">Add</a>
-                                    <label for="same_price_${i}">
-                                    	<input type="checkbox" name="same_price[${i}]" id="same_price_${i}" onchange="samePrice(this,${i})">
-                                    	S.A.B
-									</label>
+                                <td align="center">
+                                    <input type="text" name="price[${i}][]" id="price_${i}" placeholder="Price" class="form-control">
                                 </td>
-                                <td style="width: 10%">
+                                <td style="width: 15%">
                                     <input type="tel" onkeypress="return onlyNumber(event)" name="stock[${i}]" id="stock_${i}" placeholder="Stock" class="form-control">
                                 </td>
                                 <td style="width: 15%">
@@ -334,13 +350,6 @@
 									</label>
                                 </td>
                                 <td align="center">
-                                    <a role="button" onclick="openCarrierModal(${i})" class="label label-primary carrier_a_${i}">Add</a>
-                                    <label for="same_carrier_${i}">
-                                    	<input type="checkbox" name="same_carrier[${i}]" id="same_carrier_${i}" onchange="sameCarrier(this,${i})">
-                                    	S.A.B
-									</label>
-                                </td>
-                                <td align="center">
 									<a role="button" onclick="openDescriptionModal(${i})" class="label label-primary desc_a_${i}">Add</a>
 									<label for="same_desc_${i}">
                                     	<input type="checkbox" name="same_desc[${i}]" id="same_desc_${i}" onchange="sameDescription(this,${i})">
@@ -349,9 +358,9 @@
 								</td>
                             </tr>`;
             $('#append_row').append(row);
-            appendPriceModal(i);
+            // appendPriceModal(i);
             appendImageModal(i);
-            appendCarrierModal(i);
+            // appendCarrierModal(i);
             appendDescriptionModal(i);
 			i++;
         }
@@ -712,6 +721,34 @@
 			}else {
                 $('.image_a_'+dd).css('border','none');
 			}
+        }
+
+        function getSubCategory(e) {
+            $cat=$(e);
+            let val=$cat.val(),
+                sub_cat=$('#product_sub_category');
+            if ($.isEmptyObject(val)) {
+                sub_cat.html(`<option value="">select a Category First</option>`)
+            } else {
+                $.ajax({
+                    url:"{{url('admin/getSubCategory')}}/"+val,
+                    type:'get',
+                    success:function(json){
+                        // console.log(json);
+                        let option='<option value="">select a Sub-Category</option>'
+                        $.each(json.sub_category, function(k, v) {
+                            option+=`<option value="${v.id}">${v.name}</option>`
+                        });
+                        sub_cat.html(option);
+                        
+                    },
+                    error:function(err){
+                        console.error(err);
+                        
+                    }
+                })
+            }
+            
         }
     </script>
 @endsection

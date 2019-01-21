@@ -109,5 +109,6 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth']]], function () {
     Route::get('category/{id}/sub_category', 'CategoryController@showSubCategory');
     Route::post('category/{id}/sub_category', 'SubCategoryController@store');
     Route::post('sub_category/update', 'SubCategoryController@update');
+    Route::get('getSubCategory/{id}', 'CategoryController@getSubCategory');
 });
 Auth::routes();
