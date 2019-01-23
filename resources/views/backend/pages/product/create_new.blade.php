@@ -153,7 +153,7 @@
                                 <td style="width: 15%">
                                     <select id="label_0" name="product_label[0]" class="form-control">
                                         <option value="0">select label</option>
-                                        <option value="LIMITED EDITION">LIMITED EDITION</option>
+                                        <option value="FEATURED">FEATURED</option>
                                         <option value="NEW">NEW</option>
                                     </select>
                                 </td>
@@ -338,7 +338,7 @@
                                 <td style="width: 15%">
                                     <select id="label_${i}" name="product_label[${i}]" class="form-control">
                                         <option value="0">select label</option>
-                                        <option value="LIMITED EDITION">LIMITED EDITION</option>
+                                        <option value="FEATURED">FEATURED</option>
                                         <option value="NEW">NEW</option>
                                     </select>
                                 </td>

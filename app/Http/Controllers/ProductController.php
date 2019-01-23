@@ -136,7 +136,7 @@ class ProductController extends Controller
                     $p->label_css = 'colorSale';
                     $p->is_discount = 1;
                     $p->discount_price = '0.0'; //$tmpDisP[$k];
-                } elseif ($p->label == 'LIMITED EDITION') {
+                } elseif ($p->label == 'FEATURED') {
                     $p->label_css = 'colorLimited';
                 } elseif ($p->label == 'NEW') {
                     $p->label_css = 'colorNEW';
@@ -240,14 +240,14 @@ class ProductController extends Controller
             $product->quantity = $r->input('stock');
             $product->main_image = $r->input('display_pic');
 
-            if ($r->input('product_label') == '0' || sizeof($r->input('product_label')) == 0) {
+            if ($r->input('product_label') == '0') {
                 $product->label = '';
                 $product->label_css = '';
             } else {
                 $product->label = $r->input('product_label');
                 if ($product->label == 'ON SALE') {
                     $product->label_css = 'colorSale';
-                } elseif ($product->label == 'LIMITED EDITION') {
+                } elseif ($product->label == 'FEATURED') {
                     $product->label_css = 'colorLimited';
                 } elseif ($product->label == 'NEW') {
                     $product->label_css = 'colorNEW';

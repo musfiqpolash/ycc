@@ -58,7 +58,13 @@
 
                         </ul>
                     </li>
-                    <li class="nav-parent">
+                    <li class="nav">
+                        <a href="{{url('admin/banners')}}">
+                            <i class="fa fa-band-aid" aria-hidden="true"></i>
+                            <span>Banners</span>
+                        </a>
+                    </li>
+                    {{-- <li class="nav-parent">
                         <a>
                             <i class="fa fa-th" aria-hidden="true"></i>
                             <span>Accessories</span>
@@ -76,7 +82,7 @@
                             </li>
 
                         </ul>
-                    </li>
+                    </li> --}}
                     <li class="nav">
                         <a href="{{url('admin/order/list')}}">
                             <i class="fa fa-list" aria-hidden="true"></i>

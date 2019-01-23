@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Model\Information;
+use Mail;
+use App\Banner;
 use App\Model\Product;
-use App\Model\ProductImage;
-use App\Model\ProductPrice;
 use App\Model\Setting;
 use App\Model\Visitor;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
-use Mail;
 use App\Mail\Send_mail;
 use App\Mail\Newsletter;
+use App\Model\Information;
+use App\Model\ProductImage;
+use App\Model\ProductPrice;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Validator;
 
 class FrontendController extends Controller
 {
@@ -41,8 +42,9 @@ class FrontendController extends Controller
         $res = Visitor::where('d_date', date('Y-m-d'))->get(['total_count'])->first();
         if (empty($res)) {
             return 0;
-        } else
+        } else {
             return $res->total_count;
+        }
     }
 
     protected function commonData($title)
@@ -55,46 +57,20 @@ class FrontendController extends Controller
 
     protected function index()
     {
-        $tmp = Product::all();
-     //   foreach ($tmp as $val) {
-           // $ptbl['main_image']='main_image_'.$val->id.'.jpg';
-            //Product::where('id',$val->id)->update($ptbl);
-           // $tmp=ProductImage::where('product_id',$val->id)->orderBy('id')->first();
-          //  if($tmp){
-           //     $tmp->p_main_image='main_image_'.$val->id.'.jpg';
-           //     $tmp->save();
-           // }
-            //$sd = new ProductPrice();
-            //$sd->product_id = $val->id;
-            //$sd->min_quantity = 1;
-            //$sd->max_quantity = 1;
-            //$sd->price = $val->price;
-            //$sd->created_at = date('Y-m-d');
-            //$sd->save();
-       // }
-//        $tmp=ProductImage::all();
-//        foreach ($tmp as $val){
-//
-//        }
-        
-        
         $data = $this->commonData('Home');
         $product = Product::with('hasPrice')
             ->where('status', 1)
             ->where('is_accessories', 1)
-			->orderBy('name')
+            ->orderBy('name')
             ->get();
 //        dd($product->all());
         $data['products'] = $product->groupBy('group_name');
 
-        $accessory = Product::with('hasSinglePrice')
-			->where('status', 1)
-            ->where('is_accessories', 0)
-			->orderBy('name')
-            ->get();
-        $data['accessories'] = $accessory->groupBy('group_name');
+        $data['featured']=Product::where('label', "FEATURED")->inRandomOrder()->limit(4)->get();
+        $data['new']=Product::where('label', "NEW")->inRandomOrder()->limit(4)->get();
 
-        //dd($data);
+        $data['banners']=Banner::all();
+        // dd($data);
         return view('frontend.home', $data);
     }
 
@@ -254,7 +230,8 @@ class FrontendController extends Controller
         return $data;
     }
 
-    protected function getPriceListLoad(){
+    protected function getPriceListLoad()
+    {
         $tmp=Input::get('priceInfo');
         $tmp2=json_decode($tmp[0]);
         $data['priceInfo']=$tmp2;
@@ -318,11 +295,9 @@ class FrontendController extends Controller
             $data['message'] = 'Only ' . $product[0]->quantity . ' products are available at this moment';
         } else {
             $data['message'] = 'item added to cart successfully';
-
         }
         $data['count'] = sprintf("%'.02d", Cart::count());
         echo json_encode($data);
-
     }
 
     public function cart()

@@ -48,11 +48,11 @@
     color: var(--hover);
 }
 
-ul.nav li:not(:last-child) {
+#top-nav ul.nav li:not(:last-child) {
     position: relative;
 }
 
-ul.nav li:not(:last-child)::after {
+#top-nav ul.nav li:not(:last-child)::after {
     position: absolute;
     content: '';
     top: 15px;
@@ -394,6 +394,7 @@ ul.nav li:not(:last-child)::after {
     height: 85px;
     text-align: center;
     margin-bottom: 10px;
+
 }
 
 .activeImg:focus,
@@ -450,15 +451,20 @@ ul.nav li:not(:last-child)::after {
 
 .textBoxTop {
     position: absolute;
-    width: 75%;
-    top: 0;
+    top: 1rem;
     left: 0;
     text-align: center;
     font-weight: bold;
 }
 
 .colorLimited {
-    background: #FFAE36;
+    background: #59B210;
+    color: white;
+}
+
+.colorNEW {
+    background: #407AC5;
+    color: white;
 }
 
 .colorSale {
@@ -472,7 +478,8 @@ ul.nav li:not(:last-child)::after {
 .textBoxTop p {
     position: relative;
     top: 5px;
-    font-size: 1em;
+    font-size: 11px;
+    padding: 4px 14px;
 }
 
 .imageBox:hover .textBox {
@@ -880,7 +887,7 @@ nav.navbar.navbar-fixed-top .container {
         height: 20%;
     }
 
-    .textBoxTop {
+    /* .textBoxTop {
         width: 70%;
     }
 
@@ -888,7 +895,7 @@ nav.navbar.navbar-fixed-top .container {
         position: relative;
         top: 5px;
         font-size: .80em;
-    }
+    } */
 
     #promo .input-group {
         width: 100% !important;

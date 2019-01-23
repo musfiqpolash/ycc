@@ -7,25 +7,62 @@
 {{-- sliders --}}
 <div class="container">
     <div class="slider owl-carousel owl-theme">
+        @foreach ($banners as $item)
+            
         <div class="slider-item">
-            <img src="https://via.placeholder.com/1024x350" alt="C/O https://placeholder.com/">
+            <img src="{{ url('public/uploads/banner/'.$item->name) }}" alt="{{$item->name}}">
         </div>
-        <div class="slider-item">
-            <img src="https://via.placeholder.com/1024x350" alt="C/O https://placeholder.com/">
-        </div>
-        <div class="slider-item">
-            <img src="https://via.placeholder.com/1024x350" alt="C/O https://placeholder.com/">
-        </div>
-        <div class="slider-item">
-            <img src="https://via.placeholder.com/1024x350" alt="C/O https://placeholder.com/">
-        </div>
-        <div class="slider-item">
-            <img src="https://via.placeholder.com/1024x350" alt="C/O https://placeholder.com/">
-        </div>
+        @endforeach
     </div>
 </div>
 {{-- sliders end --}}
-
+<div class="container">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><a href="#">Featured</a></li>
+      <li role="presentation"><a href="#">New Arrival</a></li>
+      <li role="presentation"><a href="#">Top Sales</a></li>
+    </ul>
+    <div class="sspImg">
+        <div class="row" id="backup">
+            @foreach($featured as $key=>$val)
+                <a href="{{url(str_replace(' ','_',$val->name).'/details/'.$val->group_name)}}">
+                    <div class="col-md-3 col-xs-6 imageBox leave_img">
+                        <div class="imageBox box leave_img">
+                             <div class="loader"></div>
+                            <img id="prdct{{$val->id}}" class="img-responsive leave_img" src="{{url('public/uploads/assets/frontend/images/products/')}}/{{$val->main_image}}" alt="1">
+    
+    
+                            <div class="textBox text-center">
+                                <a href="{{url(str_replace(' ','_',$val->name).'/details/'.$val->group_name)}}">VIEW</a>
+                            </div>
+                            @if($val->label!='')
+                                <div class="textBoxTop {{$val->label_css}}">
+                                    <p>{{$val->label}}</p>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="sspText">
+                            <div class="txtUpper">
+                                <p>{{$val->name}}</p>
+                            </div>
+                            <hr>
+                            <div class="txtLower">
+                                <p>
+                                    @if($val->is_discount==1)
+                                        <i>${{$val->hasPrice[0]->price}} </i>&nbsp;
+                                        ${{$val->discount_price}}
+                                    @else
+                                        ${{$val->hasPrice[0]->price}}
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </div>
+</div>
         <!--product container-->
 <div class="container sspImg">
     <div class="row" id="backup">
@@ -141,7 +178,7 @@
             loop:true,
             items:1,
             autoplay:true,
-            autoplayTimeout:3000,
+            autoplayTimeout:5000,
             autoplayHoverPause:true,
             animateOut: 'fadeOut'
         })

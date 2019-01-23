@@ -110,5 +110,9 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth']]], function () {
     Route::post('category/{id}/sub_category', 'SubCategoryController@store');
     Route::post('sub_category/update', 'SubCategoryController@update');
     Route::get('getSubCategory/{id}', 'CategoryController@getSubCategory');
+
+    Route::get('banners', 'BannerController@index');
+    Route::post('banner/store', 'BannerController@store');
+    Route::get('banner/{id}/delete', 'BannerController@destroy');
 });
 Auth::routes();
