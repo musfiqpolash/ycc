@@ -62,6 +62,9 @@ Route::get('/payPal', 'Frontend\FrontendController@payPal');
 Route::get('/getSize/{any}/{b}', 'Frontend\FrontendController@getSize');
 Route::get('/getProductJson', 'Frontend\FrontendController@getProductJson');
 Route::any('/getPriceListLoad', 'Frontend\FrontendController@getPriceListLoad');
+Route::get('category/{id}', 'Frontend\FrontendController@products_category_wise');
+Route::get('sub_category/{id}', 'Frontend\FrontendController@products_sub_category_wise');
+Route::post('search', 'Frontend\FrontendController@search_product');
 
 
 Route::group(['prefix' => 'admin', ['middleware' => ['auth']]], function () {
@@ -114,5 +117,8 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth']]], function () {
     Route::get('banners', 'BannerController@index');
     Route::post('banner/store', 'BannerController@store');
     Route::get('banner/{id}/delete', 'BannerController@destroy');
+
+    Route::get('brands', 'BannerController@brands');
+    Route::post('brand/store', 'BannerController@brand_store');
 });
 Auth::routes();

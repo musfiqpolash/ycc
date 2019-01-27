@@ -16,6 +16,7 @@ class CreateBannersTable extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 191);
+            $table->enum('type', ['banner', 'brand'])->nullable();
             $table->timestamps();
         });
     }

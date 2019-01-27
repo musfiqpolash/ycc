@@ -18,15 +18,55 @@
 {{-- sliders end --}}
 <div class="container">
     <ul class="nav nav-tabs">
-      <li role="presentation" class="active"><a href="#">Featured</a></li>
-      <li role="presentation"><a href="#">New Arrival</a></li>
-      <li role="presentation"><a href="#">Top Sales</a></li>
+      <li role="presentation" class="tab active"><a href="#" onclick="event.preventDefault(); showDiv('featured')">Featured</a></li>
+      <li role="presentation" class="tab"><a href="#" onclick="event.preventDefault(); showDiv('new')">New Arrival</a></li>
+      <li role="presentation" class="tab"><a href="#" onclick="event.preventDefault(); showDiv('top_sale')">Top Sales</a></li>
     </ul>
-    <div class="sspImg">
-        <div class="row" id="backup">
+    <div class="sspImg" id="featured">
+        <div class="row">
             @foreach($featured as $key=>$val)
                 <a href="{{url(str_replace(' ','_',$val->name).'/details/'.$val->group_name)}}">
-                    <div class="col-md-3 col-xs-6 imageBox leave_img">
+                    <div class="col-md-3 col-sm-6 col-xs-12 imageBox leave_img">
+                        <div class="imageBox box leave_img">
+                             <div class="loader"></div>
+                            <img id="prdct{{$val->id}}" class="img-responsive leave_img" src="{{url('public/uploads/assets/frontend/images/products/')}}/{{$val->main_image}}" alt="1">
+    
+    
+                            <div class="textBox text-center">
+                                <a href="{{url(str_replace(' ','_',$val->name).'/details/'.$val->group_name)}}">VIEW</a>
+                            </div>
+                            @if($val->label!='')
+                                <div class="textBoxTop {{$val->label_css}}">
+                                    <p>{{$val->label}}</p>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="sspText">
+                            <div class="txtUpper">
+                                <p>{{$val->name}}</p>
+                            </div>
+                            <hr>
+                            <div class="txtLower">
+                                <p>
+                                    @if($val->is_discount==1)
+                                        <i>${{$val->hasPrice[0]->price}} </i>&nbsp;
+                                        ${{$val->discount_price}}
+                                    @else
+                                        ${{$val->hasPrice[0]->price}}
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    </div>
+    <div class="sspImg" id="new" style="display: none;">
+        <div class="row">
+            @foreach($new as $key=>$val)
+                <a href="{{url(str_replace(' ','_',$val->name).'/details/'.$val->group_name)}}">
+                    <div class="col-md-3 col-sm-6 col-xs-12 imageBox leave_img">
                         <div class="imageBox box leave_img">
                              <div class="loader"></div>
                             <img id="prdct{{$val->id}}" class="img-responsive leave_img" src="{{url('public/uploads/assets/frontend/images/products/')}}/{{$val->main_image}}" alt="1">
@@ -63,8 +103,22 @@
         </div>
     </div>
 </div>
+
+<div class="container mb-50">
+    <h3 class="brands">Top Brands</h3>
+    {{-- brands --}}
+    <div class="brand owl-carousel owl-theme">
+        @foreach ($brands as $item)
+            
+        <div class="brand-item">
+            <img src="{{ url('public/uploads/banner/'.$item->name) }}" alt="{{$item->name}}">
+        </div>
+        @endforeach
+    </div>
+{{-- brands end --}}
+</div>
         <!--product container-->
-<div class="container sspImg">
+{{-- <div class="container sspImg">
     <div class="row" id="backup">
         @foreach($products as $key=>$val)
             <a href="{{url(str_replace(' ','_',$val[0]->name).'/details/'.$val[0]->group_name)}}">
@@ -109,7 +163,7 @@
             </a>
         @endforeach
     </div>
-</div>
+</div> --}}
 <!--product container end-->
 @endsection
 
@@ -181,6 +235,63 @@
             autoplayTimeout:5000,
             autoplayHoverPause:true,
             animateOut: 'fadeOut'
+        });
+
+        $('.brand').owlCarousel({
+            margin:10,
+            loop:true,
+            autoplay:true,
+            autoplayTimeout:5000,
+            // autoplayHoverPause:false,
+            animateOut: 'fadeOut',
+            responsiveClass:true,
+            responsive : {
+                // breakpoint from 0 up
+                0 : {
+                    items:2,
+                },
+                // breakpoint from 480 up
+                480 : {
+                    items:4,
+                },
+                // breakpoint from 768 up
+                768 : {
+                    items:6,
+                }
+            }
         })
+
+        function showDiv(e) {
+            $('.sspImg').hide();
+            $('.tab').removeClass('active');
+            $('#'+e).show();
+            event.target.parentElement.classList.add('active');
+        }
     </script>
+@endsection
+
+@section('customCss')
+    <style>
+        .brands{
+            position:relative;
+        }
+
+        .brands::after{
+            content:"";
+            position:absolute;
+            top:50%;
+            bottom:50%;
+            left: 129px;
+            right:0;
+            border-top:1px solid #ccc;
+            overflow:hidden;
+        }
+
+        .brand-item{
+            border: 1px solid #ccc;
+        }
+        .brand-item img{
+            padding: 11px;
+        }
+    </style>
 @endsection

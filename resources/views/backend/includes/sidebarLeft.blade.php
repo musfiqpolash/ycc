@@ -60,8 +60,14 @@
                     </li>
                     <li class="nav">
                         <a href="{{url('admin/banners')}}">
-                            <i class="fa fa-band-aid" aria-hidden="true"></i>
+                            <i class="fa fa-th" aria-hidden="true"></i>
                             <span>Banners</span>
+                        </a>
+                    </li>
+                    <li class="nav">
+                        <a href="{{url('admin/brands')}}">
+                            <i class="fa fa-th" aria-hidden="true"></i>
+                            <span>Top Brands</span>
                         </a>
                     </li>
                     {{-- <li class="nav-parent">

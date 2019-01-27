@@ -36,10 +36,11 @@
                     <i class="fa fa-envelope"></i> info@yclassycloset.com
                 </span>
 
-                <form class="form-inline">
+                <form class="form-inline" method="POST" action="{{ url('search') }}">
                     <div class="form-group form-custom" style="margin: 0;">
+                        {{ csrf_field() }}
                         <label class="sr-only" for="search">Search</label>
-                        <input type="search" name="search" class="form-control" id="search" placeholder="Search">
+                        <input type="search" name="search" class="form-control" id="search" value="{{isset($search)&&$search?$search:''}}" placeholder="Search">
                     </div>
                     <div class="form-group form-custom" style="margin: 0;">
                         <label class="sr-only" for="category">Category</label>
@@ -47,14 +48,14 @@
                             <select name="category" id="category" class="form-control">
                                 <option value="">All Category</option>
                                 @if ($categories)
-                                    @foreach ($categories as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach
+                                @foreach ($categories as $item)
+                                <option value="{{$item->id}}" {{isset($category)&&$category==$item->id?'selected':''}}>{{$item->name}}</option>
+                                @endforeach
                                 @else
-                                    
-                                    <option value="">Category 1</option>
-                                    <option value="">Category 2</option>
-                                    <option value="">Category 3</option>
+
+                                <option value="">Category 1</option>
+                                <option value="">Category 2</option>
+                                <option value="">Category 3</option>
                                 @endif
                             </select>
                             <div class="input-group-addon" style="padding: 4px; border-radius: 0;">
@@ -77,14 +78,14 @@
     </div>
 </div>
 <div class="container">
-<nav class="navbar navbar-custom">
+    <nav class="navbar navbar-custom">
         <div id="menu-owl" class="owl-carousel">
             @if ($categories)
-                @foreach ($categories as $item)
-                <a class="bold" href="#">{{$item->name}}</a>
-                @endforeach
+            @foreach ($categories as $item)
+            <a class="bold" href="{{url('category/'.$item->id)}}">{{$item->name}}</a>
+            @endforeach
             @else
-                
+
             <a class="bold" href="#">Cat 1</a>
             <a class="bold" href="#">Cat 2</a>
             <a class="bold" href="#">Cat 3</a>
@@ -97,6 +98,6 @@
             <a class="bold" href="#">Cat 10</a>
             @endif
 
-        </nav>
-    </div>
+    </nav>
+</div>
 </div>

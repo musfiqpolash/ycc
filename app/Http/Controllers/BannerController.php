@@ -14,7 +14,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banners=Banner::all();
+        $banners=Banner::isBanner()->get();
         return view('backend.pages.banner.list', compact('banners'));
     }
 
@@ -43,6 +43,7 @@ class BannerController extends Controller
         \Image::make($request->image)->resize(1024, 350)->save(public_path('uploads/banner/').$name);
         $banner=new Banner();
         $banner->name=$name;
+        $banner->type='banner';
         $banner->save();
 
         return redirect()->back()->with('success', 'banner added');
@@ -97,5 +98,26 @@ class BannerController extends Controller
         $banner->delete();
 
         return redirect()->back()->with('success', 'Banner Deleted');
+    }
+
+    public function brands()
+    {
+        $brands=Banner::isBrand()->get();
+        return view('backend.pages.brand.list', compact('brands'));
+    }
+
+    public function brand_store(Request $request)
+    {
+        $request->validate([
+            'image'=>'required|file|image|max:1024'
+        ]);
+        $name=time().'.'.$request->image->getClientOriginalExtension();
+        \Image::make($request->image)->resize(130, 100)->save(public_path('uploads/banner/').$name);
+        $brand=new Banner();
+        $brand->name=$name;
+        $brand->type='brand';
+        $brand->save();
+
+        return redirect()->back()->with('success', 'banner added');
     }
 }

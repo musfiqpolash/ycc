@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use Mail;
 use App\Banner;
+use App\Category;
 use App\Model\Product;
 use App\Model\Setting;
 use App\Model\Visitor;
@@ -58,20 +59,78 @@ class FrontendController extends Controller
     protected function index()
     {
         $data = $this->commonData('Home');
-        $product = Product::with('hasPrice')
-            ->where('status', 1)
-            ->where('is_accessories', 1)
-            ->orderBy('name')
-            ->get();
-//        dd($product->all());
-        $data['products'] = $product->groupBy('group_name');
 
-        $data['featured']=Product::where('label', "FEATURED")->inRandomOrder()->limit(4)->get();
-        $data['new']=Product::where('label', "NEW")->inRandomOrder()->limit(4)->get();
+        $data['featured']=Product::active()->where('label', "FEATURED")->inRandomOrder()->limit(4)->get();
+        $data['new']=Product::active()->where('label', "NEW")->inRandomOrder()->limit(4)->get();
 
-        $data['banners']=Banner::all();
+        $data['banners']=Banner::isBanner()->get();
+        $data['brands']=Banner::isBrand()->get();
         // dd($data);
         return view('frontend.home', $data);
+    }
+
+    protected function products_category_wise($catId)
+    {
+        $data['sub_active']=null;
+        $data['cat']=Category::findOrFail($catId);
+        $data['products']=Product::active()->where('category', $catId)->get();
+        return view('frontend.product_page', $data);
+    }
+    protected function products_sub_category_wise($subCatId)
+    {
+        $data['sub_active']=$subCatId;
+        $data['cat']=Category::whereHas('subCategory', function ($q) use ($subCatId) {
+            $q->where('id', $subCatId);
+        })->firstOrFail();
+        $data['products']=Product::active()->where('sub_category_id', $subCatId)->get();
+        return view('frontend.product_page', $data);
+    }
+
+    protected function search_product(Request $request)
+    {
+        if ($request->filled('category')) {
+            $data['products']=Product::active()
+                                ->where('category', $request->category)
+                                ->where(function ($q) use ($request) {
+                                    $q->where('name', 'like', '%'.$request->input('search').'%')
+                                        ->orWhere('p_code', 'like', '%'.$request->input('search').'%')
+                                        ->orWhere('color', 'like', '%'.$request->input('search').'%')
+                                        ->orWhere(function ($q) use ($request) {
+                                            $q->whereHas('hasSubCategory', function ($q) use ($request) {
+                                                $q->where('name', 'like', '%'.$request->input('search').'%');
+                                            });
+                                        })
+                                        ->orWhere(function ($q) use ($request) {
+                                            $q->whereHas('hasPrice', function ($q) use ($request) {
+                                                $q->where('price', 'like', '%'.$request->input('search').'%');
+                                            });
+                                        });
+                                })->get();
+        } else {
+            $data['products']=Product::active()
+                                        ->where(function ($q) use ($request) {
+                                            $q->Where('name', 'like', '%'.$request->input('search').'%')
+                                                ->orWhere('p_code', 'like', '%'.$request->input('search').'%')
+                                                ->orWhere('color', 'like', '%'.$request->input('search').'%')
+                                                ->orWhere(function ($q) use ($request) {
+                                                    $q->whereHas('hasSubCategory', function ($q) use ($request) {
+                                                        $q->where('name', 'like', '%'.$request->input('search').'%');
+                                                    });
+                                                })
+                                                ->orWhere(function ($q) use ($request) {
+                                                    $q->whereHas('hasCategory', function ($q) use ($request) {
+                                                        $q->where('name', 'like', '%'.$request->input('search').'%');
+                                                    });
+                                                })
+                                                ->orWhere(function ($q) use ($request) {
+                                                    $q->whereHas('hasPrice', function ($q) use ($request) {
+                                                        $q->where('price', 'like', '%'.$request->input('search').'%');
+                                                    });
+                                                });
+                                        })->get();
+        }
+
+        return view('frontend.search_page', $data)->with($request->except('_token'));
     }
 
     protected function product_details($name, $id)
@@ -338,7 +397,7 @@ class FrontendController extends Controller
             $data['stock'] = $qu[0]->quantity;
         } else {
             if ($qty > 0) {
-//                Cart::update($rowId, $qty);
+                //Cart::update($rowId, $qty);
                 Cart::update($rowId, [
                     'qty' => $qty,
                     'price' => $tmpPrice,
