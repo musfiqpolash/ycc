@@ -44,12 +44,13 @@ class PaymentController extends Controller
 
         /** PayPal api context **/
         $paypal_conf = \Config::get('paypal');
-        $this->_api_context = new ApiContext(new OAuthTokenCredential(
+        $this->_api_context = new ApiContext(
+            new OAuthTokenCredential(
                 $paypal_conf['client_id'],
-                $paypal_conf['secret'])
+                $paypal_conf['secret']
+        )
         );
         $this->_api_context->setConfig($paypal_conf['settings']);
-
     }
 
     public function index()
@@ -114,27 +115,19 @@ class PaymentController extends Controller
             $payment->create($this->_api_context);
             //dd($payment->getLinks());
         } catch (\PayPal\Exception\PPConnectionException $ex) {
-
             if (\Config::get('app.debug')) {
-
                 \Session::flash('error', 'Connection timeout');
                 return Redirect::to('/cart');
-
             } else {
-
                 \Session::flash('error', 'Some error occur, sorry for inconvenient');
                 return Redirect::to('/cart');
-
             }
-
         } catch (Exception $e) {
             dd($e);
         }
 
         foreach ($payment->getLinks() as $link) {
-
             if ($link->getRel() == 'approval_url') {
-
                 $redirect_url = $link->getHref();
                 break;
             }
@@ -147,12 +140,10 @@ class PaymentController extends Controller
 
             /** redirect to paypal **/
             return Redirect::away($redirect_url);
-
         }
 
         \Session::flash('error', 'Unknown error occurred');
         return Redirect::to('/cart');
-
     }
 
     public function getPaymentStatus()
@@ -163,10 +154,8 @@ class PaymentController extends Controller
         /** clear the session payment ID **/
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-
             \Session::flash('error', 'Payment failed');
             return Redirect::to('/cart');
-
         }
 
         $payment = Payment::get($payment_id, $this->_api_context);
@@ -177,7 +166,7 @@ class PaymentController extends Controller
         $result = $payment->execute($execution, $this->_api_context);
 
         if ($result->getState() == 'approved') {
-//dd($result);
+            //dd($result);
             DB::transaction(function () use ($result) {
                 $tmpTrn = $result->transactions[0]->item_list;
                 $tmpItm = $tmpTrn->items;
@@ -205,6 +194,7 @@ class PaymentController extends Controller
                     $tmpOrdrSlug = OrderInfo::where('slug', $tmpSlug)->get(['slug']);
                 } while (sizeof($tmpOrdrSlug) != 0);
                 $odr->slug = $tmpSlug;
+                $odr->client_id = auth('client')->user()->id;
                 $odr->d_date = date('Y-m-d');
                 $odr->payment_id = $pymnt->id;
                 $odr->transaction_id = $result->id;
@@ -226,7 +216,7 @@ class PaymentController extends Controller
                     $ordrDtls->p_qty = $itm->quantity;
                     $ordrDtls->p_sell_price = $itm->price;
                     $ordrDtls->is_discount = $tmpItmId->is_discount;
-                    $ordrDtls->main_price = $tmpItmId->price;
+                    $ordrDtls->main_price = $tmpItmId->hasPrice[0]->price;
                     $ordrDtls->created_at = date('Y-m-d');
                     $ordrDtls->save();
                 }
@@ -235,12 +225,9 @@ class PaymentController extends Controller
 
             \Session::flash('success', 'Thank You For Using Our Service.');
             return Redirect::to('/cart');
-
         }
 
         \Session::flash('error', 'Payment failed');
         return Redirect::to('/cart');
-
     }
-
 }

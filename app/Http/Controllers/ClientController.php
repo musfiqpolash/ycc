@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\OrderInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,6 +19,7 @@ class ClientController extends Controller
     }
     public function showDashboard()
     {
+        // dd(auth('client')->user()->orders);
         return view('frontend.client_dashboard');
     }
     public function showOrders()
@@ -71,6 +73,8 @@ class ClientController extends Controller
 
     public function orderDetails($id)
     {
-        return view('frontend.order_details');
+        $order=OrderInfo::where('client_id', auth('client')->user()->id)->findOrFail($id);
+        
+        return view('frontend.order_details', compact('order'));
     }
 }

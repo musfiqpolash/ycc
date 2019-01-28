@@ -14,12 +14,13 @@
 
 //payment form
 //Route::get('/', 'PaymentController@index');
+Route::group(['middleware' => ['auth:client']], function () {
+    // route for processing payment
+    Route::post('paypal', 'PaymentController@payWithpaypal');
 
-// route for processing payment
-Route::post('paypal', 'PaymentController@payWithpaypal');
-
-// route for check status of the payment
-Route::get('status', 'PaymentController@getPaymentStatus');
+    // route for check status of the payment
+    Route::get('status', 'PaymentController@getPaymentStatus');
+});
 
 
 
@@ -65,7 +66,7 @@ Route::any('/getPriceListLoad', 'Frontend\FrontendController@getPriceListLoad');
 Route::get('category/{id}', 'Frontend\FrontendController@products_category_wise');
 Route::get('sub_category/{id}', 'Frontend\FrontendController@products_sub_category_wise');
 Route::post('search', 'Frontend\FrontendController@search_product');
-
+Route::post('customer_message', 'CustomerMessageController@store');
 
 Route::group(['prefix' => 'admin', ['middleware' => ['auth']]], function () {
     Route::get('/', 'ProductController@lists');

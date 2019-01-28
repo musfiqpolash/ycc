@@ -17,21 +17,26 @@
                                     <tr>
                                         <th>Order Number</th>
                                         <th>Order Date</th>
-                                        <th>Order Status</th>
                                         <th>Price</th>
                                         <th>Paid</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach (auth('client')->user()->orders as $item)
+                                        <tr>
+                                            <td>{{$item->slug}}</td>
+                                            <td>{{$item->d_date}}</td>
+                                            <td>{{$item->order_amount}}</td>
+                                            <td>{{$item->order_amount}}</td>
+                                            <td><a href="{{ url('client/order/'.$item->id) }}"><span class="badge">View</span></a></td>
+                                        </tr>
+                                    @endforeach
+                                    @if (auth('client')->user()->orders->count('id')==0)
                                     <tr>
-                                        <td>1025487</td>
-                                        <td>20/01/2018</td>
-                                        <td>Delivered</td>
-                                        <td>$250</td>
-                                        <td>$250</td>
-                                        <td><a href="{{ url('client/order/1') }}"><span class="badge">View</span></a></td>
+                                        <td colspan="5" class="text-center">No Order Found</td>
                                     </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

@@ -15,11 +15,11 @@
                         <table class="table table-bordered">
                             <tr>
                                 <td>Order Number</td>
-                                <td>1025487</td>
+                                <td>{{$order->slug}}</td>
                             </tr>
                             <tr>
                                 <td>Order Date</td>
-                                <td>20/01/2018</td>
+                                <td>{{$order->d_date}}</td>
                             </tr>
                             <tr>
                                 <td>Order Status</td>
@@ -27,16 +27,16 @@
                             </tr>
                             <tr>
                                 <td>Payment</td>
-                                <td>Cash On Delivery</td>
+                                <td>Paypal</td>
                             </tr>
                             <tr>
                                 <td>Total Payed</td>
-                                <td>$505</td>
+                                <td>${{$order->order_amount}}</td>
                             </tr>
                         </table>
                     </div>
                 </div>
-
+                {{-- {{dd($order->hasOrderDetails[0]->hasProduct)}} --}}
                 <div class="panel panel-default">
                     <div class="panel-heading bg-nav text-white h4 m-0">Order Items</div>
                         <div class="table-responsive">
@@ -47,36 +47,38 @@
                                         <th>Product Name</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
-                                        <th>Discount</th>
                                         <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php($ttl=0)
+                                    @foreach ($order->hasOrderDetails as $item)
+                                        <tr>
+                                            <td>{{$item->hasProduct->p_code}}</td>
+                                            <td>{{$item->hasProduct->name}}</td>
+                                            <td class="text-right">${{$item->hasProduct->hasPrice[0]->price}}</td>
+                                            <td>{{$item->p_qty}}</td>
+                                            <td class="text-right">${{$item->hasProduct->hasPrice[0]->price*$item->p_qty}}</td>
+                                        </tr>
+                                        @php($ttl+=$item->hasProduct->hasPrice[0]->price*$item->p_qty)
+                                    @endforeach
                                     <tr>
-                                        <td>P123</td>
-                                        <td>Lorem ipsum dolor sit amet.</td>
-                                        <td>$250</td>
-                                        <td class="text-right">2</td>
-                                        <td class="text-right">0%</td>
-                                        <td class="text-right">$500</td>
+                                        <td colspan="2" class="text-right"><b>Product Total</b></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right">${{$ttl}}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-right"><b>Product Total</b></td>
+                                        <td colspan="2" class="text-right"><b>Shipping Cost</b></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="text-right">$500</td>
+                                        <td class="text-right">${{$order->shipping_cost}}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-right"><b>Delivery Charge</b></td>
+                                        <td colspan="2" class="text-right"><b>Total</b></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="text-right">$5</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" class="text-right"><b>Total</b></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-right">$505</td>
+                                        <td class="text-right">${{$ttl+$order->shipping_cost}}</td>
                                     </tr>
                                 </tbody>
                             </table>

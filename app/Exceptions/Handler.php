@@ -69,7 +69,7 @@ class Handler extends ExceptionHandler
 
         switch ($guard) {
             case 'client':
-                $login=redirect()->guest(route('home'))->with('danger', 'You Need To Login First');
+                $login=redirect()->back()->with(['danger'=>'You Need To Login First','needLogin'=>1]);
                 break;
             default:
                 $login=redirect()->guest(route('login'));

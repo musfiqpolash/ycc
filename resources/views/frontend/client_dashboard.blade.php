@@ -20,7 +20,7 @@
                 <div class="dash-tab bg-blue">
                     <i class="fa fa-cart-plus"></i>
                     <div class="dash-right">
-                        <p class="number">1</p>
+                        <p class="number">{{auth('client')->user()->orders->count('id')}}</p>
                         <p class="txt">Total Order</p>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                 <div class="dash-tab bg-sky">
                     <i class="fa fa-usd"></i>
                     <div class="dash-right">
-                        <p class="number">505</p>
+                        <p class="number">{{auth('client')->user()->orders->sum('order_amount')}}</p>
                         <p class="txt">Transaction</p>
                     </div>
                 </div>

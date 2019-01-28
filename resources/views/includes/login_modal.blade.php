@@ -67,5 +67,14 @@
             }
         })
     })
+    $().ready(function(){
+        let lll="{{session('needLogin')}}";
+        
+        if (lll!="") {
+            $('#client_login_modal').modal();
+            
+        }
+
+    })
 </script>
 @endpush
