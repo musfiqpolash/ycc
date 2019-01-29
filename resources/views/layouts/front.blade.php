@@ -52,7 +52,7 @@
 @include('includes.login_modal')
 @include('includes.signup_modal')
 <!--footer-->
-{{-- @include('includes.frontFooter') --}}
+@include('includes.frontFooter')
 <!--footer end-->
 
 <!--footerlink-->

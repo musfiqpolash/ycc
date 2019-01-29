@@ -70,6 +70,12 @@
                             <span>Top Brands</span>
                         </a>
                     </li>
+                    <li class="nav">
+                        <a href="{{url('admin/customer_message')}}">
+                            <i class="fa fa-th" aria-hidden="true"></i>
+                            <span>Customer Message</span>
+                        </a>
+                    </li>
                     {{-- <li class="nav-parent">
                         <a>
                             <i class="fa fa-th" aria-hidden="true"></i>

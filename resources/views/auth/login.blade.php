@@ -4,7 +4,7 @@
     <section class="body-sign">
         <div class="center-sign">
             <a href="/" class="logo pull-left">
-                <img src="{{url('resources/assets/backend')}}/images/logo.png" height="70" alt="Porto Admin"/>
+                <img src="{{url('public/logo.png')}}" height="70" alt="logo"/>
             </a>
 
             <div class="panel panel-sign">

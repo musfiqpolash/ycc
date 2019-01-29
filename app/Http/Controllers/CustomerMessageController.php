@@ -14,7 +14,8 @@ class CustomerMessageController extends Controller
      */
     public function index()
     {
-        //
+        $messages=CustomerMessage::all();
+        return view('backend.pages.customer_message', compact('messages'));
     }
 
     /**

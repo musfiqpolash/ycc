@@ -1,8 +1,8 @@
 <!-- start: header -->
 <header class="header">
     <div class="logo-container">
-        <a href="../" class="logo">
-            <img src="{{url('public/images/sslogo.png')}}" height="40" alt="Porto Admin" />
+        <a href="../" class="logo" style="margin:0;">
+            <img src="{{url('public/logo.png')}}" height="70" alt="logo" />
         </a>
         <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
             <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
@@ -11,7 +11,7 @@
 
     <!-- start: search & user box -->
     <div class="header-right">
-        <div id="userbox" class="userbox">
+        <div id="userbox" class="userbox" style="padding: 12px 0;">
             <a href="#" data-toggle="dropdown">
                 <figure class="profile-picture">
                     {{--<img src="{{url('public/images/sslogo.png')}}" alt="Joseph Doe" class="img-circle" data-lock-picture="{{url('public/images/sslogo.png')}}" />--}}

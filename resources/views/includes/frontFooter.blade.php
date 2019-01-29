@@ -1,18 +1,11 @@
-<div class="container sspFooter mt-40" style="position:absolute; bottom:0; left:0; right:0;">
-    <div class="sspCounter">
-        <table align="center">
-            <tr>
-                <td>{{substr($visitor, 0, 1)}}</td>
-                <td>{{substr($visitor, 1, 1)}}</td>
-                <td>{{substr($visitor, 2, 1)}}</td>
-                <td>{{substr($visitor, 3, 1)}}</td>
-                <td>{{substr($visitor, 4, 1)}}</td>
-                <td>{{substr($visitor, 5, 1)}}</td>
-                <td>{{substr($visitor, 6, 1)}}</td>
-                <td>{{substr($visitor, 7, 1)}}</td>
-                <td>{{substr($visitor, 8, 1)}}</td>
-            </tr>
-        </table>
-        <p>Daily visitor</p>
-    </div>
-</div>
+<nav id="footer" class="navbar navbar-default navbar-inverse m-0" style="border-radius: 0;">
+    <div class="container">
+        <ul class="nav navbar-nav navbar-right" style="margin-left: 0;margin-right: 0;">
+            <p class="navbar-text">Follow us On Social Media
+                <a href="#" class="navbar-link"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="navbar-link"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="navbar-link"><i class="fa fa-instagram"></i></a>
+            </p>
+        </ul>
+    </div><!-- /.container-fluid -->
+</nav>

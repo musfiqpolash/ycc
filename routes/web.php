@@ -121,5 +121,7 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth']]], function () {
 
     Route::get('brands', 'BannerController@brands');
     Route::post('brand/store', 'BannerController@brand_store');
+
+    Route::get('customer_message', 'CustomerMessageController@index');
 });
 Auth::routes();

@@ -29,7 +29,7 @@
                     <div class="col-md-3 col-sm-6 col-xs-12 imageBox leave_img">
                         <div class="imageBox box leave_img">
                              <div class="loader"></div>
-                            <img id="prdct{{$val->id}}" class="img-responsive leave_img" src="{{url('public/uploads/assets/frontend/images/products/')}}/{{$val->main_image}}" alt="1">
+                            <img id="prdct{{$val->id}}" class="img-thumbnail leave_img" src="{{url('public/uploads/assets/frontend/images/products/')}}/{{$val->main_image}}" alt="1">
     
     
                             <div class="textBox text-center">
@@ -69,7 +69,7 @@
                     <div class="col-md-3 col-sm-6 col-xs-12 imageBox leave_img">
                         <div class="imageBox box leave_img">
                              <div class="loader"></div>
-                            <img id="prdct{{$val->id}}" class="img-responsive leave_img" src="{{url('public/uploads/assets/frontend/images/products/')}}/{{$val->main_image}}" alt="1">
+                            <img id="prdct{{$val->id}}" class="img-thumbnail leave_img" src="{{url('public/uploads/assets/frontend/images/products/')}}/{{$val->main_image}}" alt="1">
     
     
                             <div class="textBox text-center">
