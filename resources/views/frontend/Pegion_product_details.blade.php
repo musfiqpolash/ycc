@@ -80,7 +80,7 @@
 
 @section('content')
         <!--details-->
-<div class="container detailsDiv">
+<div class="container-fluid detailsDiv">
     <div class="row">
         <div class="col-md-12 detailsHeader">
             <h5><a href="{{url('/')}}">Home</a> / Product Details</h5>
@@ -356,7 +356,7 @@
 </div>
 <!--details end-->
 <!--accessories-->
-<div class="container sspImg">
+<div class="container-fluid sspImg">
     <h4>Related Products</h4>
     <div class="row" id="backup2">
         @foreach($accessories as $key=>$val)

@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             @include('includes.profile_sidebar')
             <div class="col-md-3">

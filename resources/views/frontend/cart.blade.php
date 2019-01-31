@@ -2,7 +2,7 @@
 @section('title',$title)
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         @include('includes.loading')
         @include('includes.flashMessage')
         <form id="form" onsubmit="return loading_func()" action="{{url('paypal')}}" method="post">

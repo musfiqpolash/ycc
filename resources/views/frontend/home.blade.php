@@ -5,7 +5,7 @@
 @section('content')
 
 {{-- sliders --}}
-<div class="container">
+<div class="container-fluid">
     <div class="slider owl-carousel owl-theme">
         @foreach ($banners as $item)
             
@@ -16,7 +16,7 @@
     </div>
 </div>
 {{-- sliders end --}}
-<div class="container">
+<div class="container-fluid">
     <ul class="nav nav-tabs">
       <li role="presentation" class="tab active"><a href="#" onclick="event.preventDefault(); showDiv('featured')">Featured</a></li>
       <li role="presentation" class="tab"><a href="#" onclick="event.preventDefault(); showDiv('new')">New Arrival</a></li>
@@ -104,7 +104,7 @@
     </div>
 </div>
 
-<div class="container mb-50">
+<div class="container-fluid mb-50">
     <h3 class="brands">Top Brands</h3>
     {{-- brands --}}
     <div class="brand owl-carousel owl-theme">

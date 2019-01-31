@@ -45,10 +45,12 @@
     $(window).on('load',function(){
         fixOwlMargin();
         positionFooter();
+        relocateCaret();
     })
     $(window).resize(function(){
         positionFooter();
         fixOwlMargin();
+        relocateCaret();
     })
 
     function fixOwlMargin(){
@@ -68,6 +70,16 @@
         }else{
             $footer.css({position:'unset'});
         }
+    }
+
+    function relocateCaret() {
+        
+        $caret=$('#angel');
+        console.log($caret);
+        
+        $c_btn=$('#addon-btn');
+        let rig=`"${$c_btn.width()+15}"`;
+        $caret.css({right:'90'});
     }
 </script>
 @yield('customJs')

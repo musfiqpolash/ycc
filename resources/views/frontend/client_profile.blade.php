@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         {{-- <h4>Welcome {{auth('client')->user()->first_name.' '.auth('client')->user()->last_name}}</h4> --}}
         <div class="row">
             @include('includes.profile_sidebar')

@@ -1,5 +1,5 @@
 <nav id="top-nav" class="navbar navbar-default navbar-white">
-    <div class="container">
+    <div class="container-fluid">
         <!-- Collect the nav links, forms, and other content for toggling -->
         <ul class="nav navbar-nav">
             <li><a href="{{url('/')}}">Home</a></li>
@@ -19,7 +19,7 @@
 </nav>
 
 <div class="nav-after">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
 
             <div class="col-md-3" id="custom-nav-left">
@@ -59,7 +59,8 @@
                                 <option value="">Category 3</option>
                                 @endif
                             </select>
-                            <div class="input-group-addon" style="padding: 4px; border-radius: 0;">
+                            <i id="angel" class="fa fa-angle-down" style="position:absolute; right: 80px; top: 14px; z-index: 7; font-size: 18px; color:#ccc;"></i>
+                            <div id="addon-btn" class="input-group-addon" style="padding: 4px; border: none;">
                                 <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
@@ -78,7 +79,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-custom">
         <div id="menu-owl" class="owl-carousel">
             @if ($categories)

@@ -3,14 +3,14 @@
 @section('title','Products')
 
 @section('content')
-{{-- <div class="container">
+{{-- <div class="container-fluid">
     <div class="p-title">
         <h3>{{$p_title}}</h3>
         <div class="p-title-line"></div>
     </div>
 </div> --}}
- <!--product container-->
-<div class="container sspImg">
+ <!--product container-fluid-->
+<div class="container-fluid sspImg">
     <div class="row" id="backup">
         <div class="col-md-3">
             <div class="panel panel-default">
@@ -69,7 +69,7 @@
         </div>
     </div>
 </div>
-<!--product container end-->
+<!--product container-fluid end-->
 @endsection
 
 @section('customCss')

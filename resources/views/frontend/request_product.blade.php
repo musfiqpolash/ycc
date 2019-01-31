@@ -3,7 +3,7 @@
 @section('title','Product Request')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
             <form onsubmit="event.preventDefault(); ajaxSubmit();" id="product_request_form" method="POST" action="server.php">
                     <div class="form-group mt-4">
                         <label for="product_url">Product URL <span class="red">*</span></label>
@@ -50,7 +50,7 @@
     </div>
     @if ($brands->count('id')>0)
         
-    <div class="container mb-50">
+    <div class="container-fluid mb-50">
             <div class="p-title">
                     <h3>We are taking orders from</h3>
                     <div class="p-title-line"></div>

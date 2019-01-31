@@ -3,7 +3,7 @@
 @section('title',$title)
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
                 <iframe src="https://maps.google.it/maps?q=House: 452, Road:31, New Mohakhali DOHS Dhaka 1206 &output=embed"

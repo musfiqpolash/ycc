@@ -3,14 +3,14 @@
 @section('title','Search')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="p-title">
         <h3>Search Result</h3>
         <div class="p-title-line"></div>
     </div>
 </div>
- <!--product container-->
-<div class="container sspImg">
+ <!--product container-fluid-->
+<div class="container-fluid sspImg">
     <div class="row" id="backup">
             @if ($products->count('id')==0)
             <div class="col-md-12">
@@ -62,7 +62,7 @@
     
     </div>
 </div>
-<!--product container end-->
+<!--product container-fluid end-->
 @endsection
 
 @section('customCss')
