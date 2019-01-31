@@ -120,4 +120,25 @@ class BannerController extends Controller
 
         return redirect()->back()->with('success', 'banner added');
     }
+
+    public function request_brands()
+    {
+        $brands=Banner::isRequestBrand()->get();
+        return view('backend.pages.request_brand.list', compact('brands'));
+    }
+
+    public function request_brand_store(Request $request)
+    {
+        $request->validate([
+            'image'=>'required|file|image|max:1024'
+        ]);
+        $name=time().'.'.$request->image->getClientOriginalExtension();
+        \Image::make($request->image)->resize(130, 100)->save(public_path('uploads/banner/').$name);
+        $brand=new Banner();
+        $brand->name=$name;
+        $brand->type='request_brand';
+        $brand->save();
+
+        return redirect()->back()->with('success', 'banner added');
+    }
 }

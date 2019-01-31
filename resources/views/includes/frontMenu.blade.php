@@ -4,6 +4,7 @@
         <ul class="nav navbar-nav">
             <li><a href="{{url('/')}}">Home</a></li>
             <li><a href="{{url('/contact_us')}}">Contact Us</a></li>
+            <li><a href="{{url('/request_product')}}">Request Products</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             @if (auth('client')->check())

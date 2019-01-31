@@ -42,8 +42,14 @@
             }
         }
     });
-    $(window).on('load',fixOwlMargin)
-    $(window).resize(fixOwlMargin)
+    $(window).on('load',function(){
+        fixOwlMargin();
+        positionFooter();
+    })
+    $(window).resize(function(){
+        positionFooter();
+        fixOwlMargin();
+    })
 
     function fixOwlMargin(){
         $outer=$('#menu-owl .owl-stage-outer');
@@ -54,6 +60,14 @@
         }
         // console.log($inner.width(),$outer.width());
         
+    }
+    function positionFooter(){
+        $footer=$("#footer");
+        if ($("body").height()<$(window).height()) {
+            $footer.css({position:'fixed',bottom:'0',left:'0',right:'0'});
+        }else{
+            $footer.css({position:'unset'});
+        }
     }
 </script>
 @yield('customJs')

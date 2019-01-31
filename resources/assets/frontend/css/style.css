@@ -3,6 +3,11 @@
     --hover: #DB886B;
 }
 
+*[id$="-error"] {
+    color: red;
+    font-size: 11px;
+}
+
 .bg-nav {
     background: var(--nav-color) !important;
 }

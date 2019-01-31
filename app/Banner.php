@@ -14,4 +14,8 @@ class Banner extends Model
     {
         return $q->where('type', 'brand');
     }
+    public function scopeIsRequestBrand($q)
+    {
+        return $q->where('type', 'request_brand');
+    }
 }

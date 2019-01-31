@@ -122,11 +122,17 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth']]], function () {
     Route::get('brands', 'BannerController@brands');
     Route::post('brand/store', 'BannerController@brand_store');
 
+    Route::get('request_brands', 'BannerController@request_brands');
+    Route::post('request_brand/store', 'BannerController@request_brand_store');
+
     Route::get('customer_message', 'CustomerMessageController@index');
 
-    Route::get('product_request', function () {
-        $p_req=App\ProductRequest::orderBy('created_at', 'desc')->paginate(10);
-        return view('backend.pages.product_request', compact('p_req'));
-    });
+    Route::get('product_request', 'ProductRequestController@index');
 });
 Auth::routes();
+
+Route::get('request_product', function () {
+    $brands=App\Banner::isRequestBrand()->get();
+    return view('frontend.request_product', compact('brands'));
+});
+Route::post('request_product', "ProductRequestController@store")->name('request.store');

@@ -76,37 +76,27 @@
                             <span>Customer Message</span>
                         </a>
                     </li>
-                    <li class="nav">
-                        <a href="{{url('admin/product_request')}}">
-                            <i class="fa fa-th" aria-hidden="true"></i>
-                            <span>Product Requests</span>
-                        </a>
-                    </li>
-                    {{-- <li class="nav-parent">
-                        <a>
-                            <i class="fa fa-th" aria-hidden="true"></i>
-                            <span>Accessories</span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <li>
-                                <a href="{{url('admin/accessories/create')}}">
-                                    Add New Accessories
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{url('admin/product/list/0')}}">
-                                    Accessories List
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li> --}}
+        
                     <li class="nav">
                         <a href="{{url('admin/order/list')}}">
                             <i class="fa fa-list" aria-hidden="true"></i>
                             <span>Order List</span>
                         </a>
                     </li>
+
+                    <li class="nav">
+                        <a href="{{url('admin/product_request')}}">
+                            <i class="fa fa-th" aria-hidden="true"></i>
+                            <span>Product Requests</span>
+                        </a>
+                    </li>
+                    <li class="nav">
+                            <a href="{{url('admin/request_brands')}}">
+                                <i class="fa fa-th" aria-hidden="true"></i>
+                                <span>Request Brands</span>
+                            </a>
+                        </li>
+
                     <hr class="sperator">
                     <li class="nav-parent">
                         <a>

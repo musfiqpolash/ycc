@@ -47,10 +47,13 @@
     </div>
     @endif
 </div>
-@yield('content')
+<main id="main">
+    @yield('content')
+    @include('includes.login_modal')
+    @include('includes.signup_modal')
 
-@include('includes.login_modal')
-@include('includes.signup_modal')
+</main>
+
 <!--footer-->
 @include('includes.frontFooter')
 <!--footer end-->
