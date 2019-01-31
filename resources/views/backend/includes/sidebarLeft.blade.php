@@ -76,6 +76,12 @@
                             <span>Customer Message</span>
                         </a>
                     </li>
+                    <li class="nav">
+                        <a href="{{url('admin/product_request')}}">
+                            <i class="fa fa-th" aria-hidden="true"></i>
+                            <span>Product Requests</span>
+                        </a>
+                    </li>
                     {{-- <li class="nav-parent">
                         <a>
                             <i class="fa fa-th" aria-hidden="true"></i>

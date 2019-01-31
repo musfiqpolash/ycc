@@ -79,6 +79,14 @@
     float: right;
 }
 
+@media only screen and (max-width: 500px) {
+    #top-nav .navbar-nav {
+        display: block;
+        text-align: center;
+        float: none;
+    }
+}
+
 .nav-after {
     padding-top: 10px;
     padding-bottom: 30px;

@@ -10,7 +10,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-request
+# request
 storage/framework/views/*
 public/uploads/*
 *.zip

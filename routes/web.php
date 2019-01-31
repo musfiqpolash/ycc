@@ -123,5 +123,10 @@ Route::group(['prefix' => 'admin', ['middleware' => ['auth']]], function () {
     Route::post('brand/store', 'BannerController@brand_store');
 
     Route::get('customer_message', 'CustomerMessageController@index');
+
+    Route::get('product_request', function () {
+        $p_req=App\ProductRequest::orderBy('created_at', 'desc')->paginate(10);
+        return view('backend.pages.product_request', compact('p_req'));
+    });
 });
 Auth::routes();
