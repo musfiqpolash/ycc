@@ -46,6 +46,11 @@ Route::group(['prefix' => 'client'], function () {
         Route::post('update', 'ClientController@update')->name('p_update');
     });
 });
+
+Route::group(['middleware' => ['auth:client']], function () {
+    Route::get('/checkout', 'Frontend\FrontendController@checkout');
+    Route::post('/checkout', 'PaymentController@cashOnDelivery');
+});
 Route::post('client/login', 'Auth\ClientLoginController@login');
 
 /******Home page*********/
@@ -58,7 +63,7 @@ Route::get('/addToCart', 'Frontend\FrontendController@addToCart');
 Route::get('/rmv/{id}', 'Frontend\FrontendController@removeFromCart');
 Route::get('/updateCart/{rowId}/{id}/{qty}', 'Frontend\FrontendController@updateCart');
 Route::get('/cart', 'Frontend\FrontendController@cart');
-Route::get('/checkout', 'Frontend\FrontendController@checkout');
+
 Route::get('/payPal', 'Frontend\FrontendController@payPal');
 Route::get('/getSize/{any}/{b}', 'Frontend\FrontendController@getSize');
 Route::get('/getProductJson', 'Frontend\FrontendController@getProductJson');

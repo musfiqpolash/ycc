@@ -20,7 +20,7 @@
     <ul class="nav nav-tabs">
       <li role="presentation" class="tab active"><a href="#" onclick="event.preventDefault(); showDiv('featured')">Featured</a></li>
       <li role="presentation" class="tab"><a href="#" onclick="event.preventDefault(); showDiv('new')">New Arrival</a></li>
-      <li role="presentation" class="tab"><a href="#" onclick="event.preventDefault(); showDiv('top_sale')">Top Sales</a></li>
+      {{-- <li role="presentation" class="tab"><a href="#" onclick="event.preventDefault(); showDiv('top_sale')">Top Sales</a></li> --}}
     </ul>
     <div class="sspImg" id="featured">
         <div class="row">
@@ -50,9 +50,9 @@
                                 <p>
                                     @if($val->is_discount==1)
                                         <i>${{$val->hasPrice[0]->price}} </i>&nbsp;
-                                        ${{$val->discount_price}}
+                                        <span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$val->discount_price}}
                                     @else
-                                        ${{$val->hasPrice[0]->price}}
+                                    <span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$val->hasPrice[0]->price}}
                                     @endif
                                 </p>
                             </div>
@@ -90,9 +90,9 @@
                                 <p>
                                     @if($val->is_discount==1)
                                         <i>${{$val->hasPrice[0]->price}} </i>&nbsp;
-                                        ${{$val->discount_price}}
+                                        <span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$val->discount_price}}
                                     @else
-                                        ${{$val->hasPrice[0]->price}}
+                                        <span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$val->hasPrice[0]->price}}
                                     @endif
                                 </p>
                             </div>

@@ -27,11 +27,11 @@
                             </tr>
                             <tr>
                                 <td>Payment</td>
-                                <td>Paypal</td>
+                                <td>{{$order->hasPayment->payment_method}}</td>
                             </tr>
                             <tr>
                                 <td>Total Payed</td>
-                                <td>${{$order->order_amount}}</td>
+                                <td><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$order->order_amount}}</td>
                             </tr>
                         </table>
                     </div>
@@ -56,9 +56,9 @@
                                         <tr>
                                             <td>{{$item->hasProduct->p_code}}</td>
                                             <td>{{$item->hasProduct->name}}</td>
-                                            <td class="text-right">${{$item->hasProduct->hasPrice[0]->price}}</td>
+                                            <td class="text-right"><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$item->hasProduct->hasPrice[0]->price}}</td>
                                             <td>{{$item->p_qty}}</td>
-                                            <td class="text-right">${{$item->hasProduct->hasPrice[0]->price*$item->p_qty}}</td>
+                                            <td class="text-right"><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$item->hasProduct->hasPrice[0]->price*$item->p_qty}}</td>
                                         </tr>
                                         @php($ttl+=$item->hasProduct->hasPrice[0]->price*$item->p_qty)
                                     @endforeach
@@ -66,19 +66,19 @@
                                         <td colspan="2" class="text-right"><b>Product Total</b></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="text-right">${{$ttl}}</td>
+                                        <td class="text-right"><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$ttl}}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="text-right"><b>Shipping Cost</b></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="text-right">${{$order->shipping_cost}}</td>
+                                        <td class="text-right"><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$order->shipping_cost}}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="text-right"><b>Total</b></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="text-right">${{$ttl+$order->shipping_cost}}</td>
+                                        <td class="text-right"><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$ttl+$order->shipping_cost}}</td>
                                     </tr>
                                 </tbody>
                             </table>

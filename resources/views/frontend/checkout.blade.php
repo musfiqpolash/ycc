@@ -3,7 +3,7 @@
 
 @section('content')
     <!--content-->
-    <div class="container">
+    <div class="container marginBottom">
         @include('includes.loading')
         <div class="row marginTop">
             <div id="lower" class="col-md-5 col-md-push-7 backgroundGrey sticky">
@@ -42,26 +42,27 @@
                 </div>
             </div>
             <div id="upper" class="col-md-7 col-md-pull-5">
-                <form onsubmit="loading_func()" id="form" action="">
+                <form onsubmit="loading_func()" id="form" action="" method="POST">
+                    {{ csrf_field() }}
                     <h3>1. Shipping Details <span class="pull-right edit1"><small><a
                                         class="color">Edit</a></small></span></h3>
                     <div class="row shipDetail">
                         <div class="col-md-12">
                             <label for="email">*Email for Order Information</label>
                             <div>
-                                <input type="email" class="form-control" id="email" name="email">
+                                <input type="email" readonly class="form-control" id="email" name="email" value="{{auth('client')->user()->email}}">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <label for="firstName">*First Name</label>
                             <div>
-                                <input type="text" class="form-control" id="firstName" name="firstName">
+                                <input type="text" class="form-control" id="firstName" name="firstName" value="{{auth('client')->user()->first_name}}">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <label for="lastName">*Last Name</label>
                             <div>
-                                <input type="text" class="form-control" id="lastName" name="lastName">
+                                <input type="text" class="form-control" id="lastName" name="lastName" value="{{auth('client')->user()->last_name}}">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -93,7 +94,7 @@
                                 <div class="col-md-6">
                                     <label for="phone">*Phone</label>
                                     <div>
-                                        <input type="text" name="phone" id="phone" class="form-control">
+                                        <input type="text" name="phone" id="phone" class="form-control" value="{{auth('client')->user()->phone}}">
                                     </div>
                                 </div>
                             </div>
@@ -141,23 +142,23 @@
                         <div class="col-md-12">
                             <div class="radio">
                                 <label for="credit">
-                                    <input checked type="radio" name="payment" id="credit" value="credit/debit">
-                                    Credit / Debit Card
+                                    <input checked type="radio" name="payment" id="credit" value="cash on delivery">
+                                    Cash On Delivery
                                 </label>
-                                <span class="pull-right"><img src="{{url('public/images/creditCard.svg')}}"
-                                                              alt="credit card"></span>
+                                {{-- <span class="pull-right"><img src="{{url('public/images/creditCard.svg')}}"
+                                                              alt="credit card"></span> --}}
                             </div>
-                            <div class="radio">
+                            {{-- <div class="radio">
                                 <label for="paypal">
                                     <input type="radio" name="payment" id="paypal" value="paypal">
                                     PayPal
                                 </label>
                                 <span id="paypalImg" class="pull-right"><img src="{{url('public/images/payPal.svg')}}"
                                                                              alt="payPal"></span>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-md-12 marginTop marginBottom creditInfo">
-                            <h4>Payment Information</h4>
+                            {{-- <h4>Payment Information</h4>
                             <div class="form-group">
                                 <label for="cc-number" class="control-label">Card number
                                     <small class="text-muted">[<span class="cc-brand"></span>]</small>
@@ -181,12 +182,12 @@
                             <div class="form-group">
                                 <label for="holderName" class="control-label">Card Holder name</label>
                                 <input id="holderName" type="text" class="input-lg form-control" data-numeric>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <h4>Billing Address</h4>
                                 <label for="check" class="control-label">
-                                    <input id="check" type="checkbox" class="" checked>Same as Shipping Address
+                                    <input id="check" type="checkbox" name="same_address" value="true" class="" checked>Same as Shipping Address
                                 </label>
 
                             </div>
@@ -253,6 +254,7 @@
                     </div>
                     <div class="row paymentReview">
                         <div class="col-md-12">
+                            <p>Payment Method: Cash On Delivery</p>
                             <p id="pName"></p>
                             <p id="pEmail"></p>
                             <p id="pAddress"></p>
@@ -284,10 +286,10 @@
 @endsection
 
 @section('customJs')
-    <script src="{{asset('public/js/jquery.validate.js')}}"></script>
-    <script src="{{asset('public/js/validation.js')}}"></script>
-    <script src="{{asset('public/js/jquery.payment.js')}}"></script>
-    <script src="{{asset('public/js/checkout.js')}}"></script>
+    <script src="{{asset('resources/assets/frontend/js/jquery.validate.js')}}"></script>
+    <script src="{{asset('resources/assets/frontend/js/validation.js')}}"></script>
+    <script src="{{asset('resources/assets/frontend/js/jquery.payment.js')}}"></script>
+    <script src="{{asset('resources/assets/frontend/js/checkout.js')}}"></script>
     <script>
         function loading_func() {
             $('#progress').show();

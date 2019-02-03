@@ -1,5 +1,5 @@
-$(function(){
-    $('.edit1').on('click',function () {
+$(function () {
+    $('.edit1').on('click', function () {
         $('.edit1').hide();
         $('.edit2').hide();
         $('.edit3').hide();
@@ -13,7 +13,7 @@ $(function(){
         $('.warning-div').hide();
     });
 
-    $('.edit2').on('click',function () {
+    $('.edit2').on('click', function () {
         $('.edit2').hide();
         $('.edit3').hide();
         $('.deliveryDetails').show();
@@ -24,7 +24,7 @@ $(function(){
         $('.warning-div').hide();
     });
 
-    $('.edit3').on('click',function () {
+    $('.edit3').on('click', function () {
         $('.edit3').hide();
         $('.paymentDetails').show();
         $('.paymentReview').hide();
@@ -50,21 +50,20 @@ $(function(){
         $('.deliveryReview').show();
         $('.paymentDetails').show();
         $('.edit2').show();
-        $('#cc-number').rules('add',{
-            required:true
+        $('#cc-number').rules('add', {
+            required: true
         });
-        $('#cc-exp').rules('add',{
-            required:true
+        $('#cc-exp').rules('add', {
+            required: true
         });
-        $('#cc-cvc').rules('add',{
-            required:true
+        $('#cc-cvc').rules('add', {
+            required: true
         });
 
     });
 
-    $('#check').on('change',function () {
-        if ($('#check').is(":checked"))
-        {
+    $('#check').on('change', function () {
+        if ($('#check').is(":checked")) {
             $('#bfirstName').rules('remove');
             $('#blastName').rules('remove');
             $('#baddress').rules('remove');
@@ -72,47 +71,45 @@ $(function(){
             $('#bcountry').rules('remove');
             $('#bphone').rules('remove');
             $('#bzip').rules('remove');
-        }
-        else
-            {
-            $('#bfirstName').rules('add',{
-                required:true,
-                minlength:2
+        } else {
+            $('#bfirstName').rules('add', {
+                required: true,
+                minlength: 2
             });
-            $('#blastName').rules('add',{
-                required:true,
-                minlength:2
+            $('#blastName').rules('add', {
+                required: true,
+                minlength: 2
             });
-            $('#baddress').rules('add',{
-                required:true,
-                minlength:2
+            $('#baddress').rules('add', {
+                required: true,
+                minlength: 2
             });
-            $('#bcity').rules('add',{
-                required:true,
-                minlength:2
+            $('#bcity').rules('add', {
+                required: true,
+                minlength: 2
             });
-            $('#bcountry').rules('add',{
-                required:true,
-                minlength:2
+            $('#bcountry').rules('add', {
+                required: true,
+                minlength: 2
             });
-            $('#bphone').rules('add',{
-                required:true,
-                digits:true
+            $('#bphone').rules('add', {
+                required: true,
+                digits: true
             });
-            $('#bzip').rules('add',{
-                required:true
+            $('#bzip').rules('add', {
+                required: true
             });
         }
     });
 
     $('#paypal').on('change', function () {
-        if($('#paypal').is(":checked")){
+        if ($('#paypal').is(":checked")) {
             $('.creditInfo').hide();
             $('.paypalInfo').show();
         }
     });
     $('#credit').on('change', function () {
-        if($('#credit').is(":checked")){
+        if ($('#credit').is(":checked")) {
             $('.paypalInfo').hide();
             $('.creditInfo').show();
         }
@@ -123,50 +120,42 @@ $(function(){
     });
 
     $('#con2').on('click', function () {
-        if($('#form').valid()){
-            if($('#credit').is(":checked")){
-                var cardType = $.payment.cardType($('.cc-number').val());
-                if (!$.payment.validateCardNumber($('.cc-number').val())){
-                    $('.cc-number').parent().addClass('has-error');
-                }
-                if (!$.payment.validateCardExpiry($('.cc-exp').payment('cardExpiryVal'))){
-                    $('.cc-exp').parent().addClass('has-error');
-                }
-                if (!$.payment.validateCardCVC($('.cc-cvc').val(), cardType)){
-                    $('.cc-cvc').parent().addClass('has-error');
-                }
-                if ($.payment.validateCardNumber($('.cc-number').val()) && $.payment.validateCardExpiry($('.cc-exp').payment('cardExpiryVal')) && $.payment.validateCardCVC($('.cc-cvc').val(), cardType))
-                {
-                    if ($('#check').is(":checked"))
-                    {
-                        $('#pName').text($('#firstName').val() + ' ' + $('#lastName').val());
-                        $('#pEmail').text($('#email').val());
-                        $('#pAddress').text($('#address').val() + ' ,' + $('#city').val() + ' ,' + $('#zip').val() + ' ,' + $('#country').val());
-                        $('#pPhone').text($('#phone').val());
-                    }
-                    else
-                        {
-                        $('#pName').text($('#bfirstName').val() + ' ' + $('#blastName').val());
-                        $('#pEmail').text($('#email').val());
-                        $('#pAddress').text($('#baddress').val() + ' ,' + $('#bcity').val() + ' ,' + $('#bzip').val() + ' ,' + $('#bcountry').val());
-                        $('#pPhone').text($('#bphone').val());
-                    }
-                    $('.paymentDetails').hide();
-                    $('.paymentReview').show();
-                    $('.orderReview').show();
-                    $('.edit3').show();
-                }
-            }
-            else{
-                if ($('#check').is(":checked"))
-                {
+        if ($('#form').valid()) {
+            if ($('#credit').is(":checked")) {
+                // var cardType = $.payment.cardType($('.cc-number').val());
+                // if (!$.payment.validateCardNumber($('.cc-number').val())) {
+                //     $('.cc-number').parent().addClass('has-error');
+                // }
+                // if (!$.payment.validateCardExpiry($('.cc-exp').payment('cardExpiryVal'))) {
+                //     $('.cc-exp').parent().addClass('has-error');
+                // }
+                // if (!$.payment.validateCardCVC($('.cc-cvc').val(), cardType)) {
+                //     $('.cc-cvc').parent().addClass('has-error');
+                // }
+                // if ($.payment.validateCardNumber($('.cc-number').val()) && $.payment.validateCardExpiry($('.cc-exp').payment('cardExpiryVal')) && $.payment.validateCardCVC($('.cc-cvc').val(), cardType)) {
+                if ($('#check').is(":checked")) {
                     $('#pName').text($('#firstName').val() + ' ' + $('#lastName').val());
                     $('#pEmail').text($('#email').val());
                     $('#pAddress').text($('#address').val() + ' ,' + $('#city').val() + ' ,' + $('#zip').val() + ' ,' + $('#country').val());
                     $('#pPhone').text($('#phone').val());
+                } else {
+                    $('#pName').text($('#bfirstName').val() + ' ' + $('#blastName').val());
+                    $('#pEmail').text($('#email').val());
+                    $('#pAddress').text($('#baddress').val() + ' ,' + $('#bcity').val() + ' ,' + $('#bzip').val() + ' ,' + $('#bcountry').val());
+                    $('#pPhone').text($('#bphone').val());
                 }
-                else
-                    {
+                $('.paymentDetails').hide();
+                $('.paymentReview').show();
+                $('.orderReview').show();
+                $('.edit3').show();
+                // }
+            } else {
+                if ($('#check').is(":checked")) {
+                    $('#pName').text($('#firstName').val() + ' ' + $('#lastName').val());
+                    $('#pEmail').text($('#email').val());
+                    $('#pAddress').text($('#address').val() + ' ,' + $('#city').val() + ' ,' + $('#zip').val() + ' ,' + $('#country').val());
+                    $('#pPhone').text($('#phone').val());
+                } else {
                     $('#pName').text($('#bfirstName').val() + ' ' + $('#blastName').val());
                     $('#pEmail').text($('#email').val());
                     $('#pAddress').text($('#baddress').val() + ' ,' + $('#bcity').val() + ' ,' + $('#bzip').val() + ' ,' + $('#bcountry').val());
@@ -180,11 +169,16 @@ $(function(){
         }
     });
 
-    $('#con3').on('click',function () {
-        $('.warning-div').show();
+    $('#con3').on('click', function () {
+        if ($('#form').valid()) {
+            $('#form').submit();
+        } else {
+            $('.warning-div').show();
+
+        }
     });
 
-    $('#close').on('click',function () {
+    $('#close').on('click', function () {
         $('.warning-div').hide();
     });
 

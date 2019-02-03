@@ -75,11 +75,10 @@
     function relocateCaret() {
         
         $caret=$('#angel');
-        console.log($caret);
         
         $c_btn=$('#addon-btn');
-        let rig=`"${$c_btn.width()+15}"`;
-        $caret.css({right:'90'});
+
+        $caret.css({position:'absolute', right: `${$c_btn.width()+25}px`, top: '14px', 'z-index': '7', 'font-size': '18px', color:'#ccc'});
     }
 </script>
 @yield('customJs')

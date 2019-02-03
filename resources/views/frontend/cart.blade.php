@@ -23,8 +23,8 @@
                                     {{--alt="pay"></span></a>--}}
                                 </div>
                                 <div class="col-md-6 marginBottom">
-                                    <button type="submit" class="btn btn-info btn-custom ckout">Checkout</button>
-                                    {{--<a href="{{url('/checkout')}}" class="btn btn-info btn-custom">Checkout</a>--}}
+                                    {{-- <button type="submit" class="btn btn-info btn-custom ckout">Checkout</button> --}}
+                                    <a href="{{url('/checkout')}}" class="btn btn-info btn-custom">Checkout</a>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center">$ <span id="price{{$row->rowId}}">{{$row->price}}</span></td>
+                                <td class="text-center"><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span> <span id="price{{$row->rowId}}">{{$row->price}}</span></td>
                                 <td class="text-center">
                                     <div>
                                         <input min="1" onblur="updateCart(this.id,'{{$row->id}}',this.value)"
@@ -78,7 +78,7 @@
                                         id="{{$row->rowId}}" type="number" name="quantity" value="{{$row->qty}}" class="form-control quantity">
                                     </div>
                                 </td>
-                                <td class="text-right" id="t{{$row->rowId}}">${{$row->price*$row->qty}}</td>
+                                <td class="text-right" id="t{{$row->rowId}}"><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$row->price*$row->qty}}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -98,17 +98,17 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <p><strong>Subtotal <span id="subTotal" class="pull-right">${{Cart::subtotal()}}</span></strong></p>
-                    <p><strong>Shipping <span class="pull-right">${{$page_data->shipping_cost}}</span></strong></p>
+                    <p><strong>Subtotal <span id="subTotal" class="pull-right"><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{Cart::subtotal()}}</span></strong></p>
+                    <p><strong>Shipping <span class="pull-right"><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$page_data->shipping_cost}}</span></strong></p>
                     <p><a href=""><i>bangladesh</i></a></p>
                     <hr class="hr">
                     <h4>Total <span id="sTotal"
-                                    class="pull-right">${{number_format((float)implode('',explode(',',Cart::subtotal()))+$page_data->shipping_cost,2)}}</span>
+                                    class="pull-right"><span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{number_format((float)implode('',explode(',',Cart::subtotal()))+$page_data->shipping_cost,2)}}</span>
                     </h4>
-                    {{--<a href="{{url('/checkout ')}}" class="btn btn-info btn-custom marginBottom">Checkout</a>--}}
+                    <a href="{{url('/checkout ')}}" class="btn btn-info btn-custom marginBottom">Checkout</a>
                     {{--<a href="{{url('/payPal')}}" class="btn btn-warning btn-custom">Checkout with <span><img--}}
                     {{--src="{{asset('public/images/paypal.png')}}" alt="pay"></span></a>--}}
-                    <button type="submit" class="btn btn-info btn-custom marginBottom ckout">Checkout</button>
+                    {{-- <button type="submit" class="btn btn-info btn-custom marginBottom ckout">Checkout</button> --}}
                     <button type="submit" class="btn btn-warning btn-custom ckout">Checkout with <span><img
                                     src="{{asset('public/images/paypal.png')}}" alt="pay"></span></button>
 

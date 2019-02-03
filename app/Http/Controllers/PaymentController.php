@@ -230,4 +230,77 @@ class PaymentController extends Controller
         \Session::flash('error', 'Payment failed');
         return Redirect::to('/cart');
     }
+
+    public function cashOnDelivery(Request $request)
+    {
+        // dd($request->all());
+
+        DB::transaction(function () use ($request) {
+            $shpaddrs['recipient_name'] = $request->firstName.' '.$request->lastName;
+            $shpaddrs['address'] = $request->address;
+            $shpaddrs['city'] = $request->city;
+            $shpaddrs['country'] = $request->country;
+            $shpaddrs['postal_code'] = $request->zip;
+            $shpaddrs['phone'] = $request->phone;
+            
+            if (!$request->filled('same_address')) {
+                $shpaddrs['recipient_name'] = $request->bfirstName.' '.$request->blastName;
+                $shpaddrs['address'] = $request->baddress;
+                $shpaddrs['city'] = $request->bcity;
+                $shpaddrs['country'] = $request->bcountry;
+                $shpaddrs['postal_code'] = $request->bzip;
+                $shpaddrs['phone'] = $request->bphone;
+            }
+            $shpaddrs['email'] = $request->email;
+            
+            $pymnt = new PaymentInfo();
+            $pymnt->email = $request->email;
+            $pymnt->first_name = $request->firstName;
+            $pymnt->last_name = $request->lastName;
+            $pymnt->payer_id = str_random(13);
+            $pymnt->payment_method = $request->payment;
+            $pymnt->status = 1;
+            $pymnt->created_at = date('Y-m-d');
+            $pymnt->save();
+
+            $st=Setting::first();
+
+            $odr = new OrderInfo();
+            do {
+                $tmpSlug = substr(uniqid(), 0, 7);
+                $tmpOrdrSlug = OrderInfo::where('slug', $tmpSlug)->get(['slug']);
+            } while (sizeof($tmpOrdrSlug) != 0);
+            $odr->slug = $tmpSlug;
+            $odr->client_id = auth('client')->user()->id;
+            $odr->d_date = date('Y-m-d');
+            $odr->payment_id = $pymnt->id;
+            $odr->transaction_id = 'COD-'.str_random(25);
+            $odr->shipping_point = json_encode($shpaddrs);
+            $odr->comment = '';
+            $odr->shipping_cost = $st->shipping_cost;
+            $odr->order_amount = (float)implode('', explode(',', Cart::subtotal()))+$st->shipping_cost;
+            $odr->status = 1;
+            $odr->created_at = date('Y-m-d');
+            $odr->save();
+
+            foreach (Cart::Content() as $itm) {
+                $tmpItmId = Product::where('p_code', $itm->options['p_code'])->first();
+                if (empty($tmpItmId)) {
+                }
+                $ordrDtls = new OrderDetails();
+                $ordrDtls->order_id = $odr->id;
+                $ordrDtls->p_id = $tmpItmId->id;
+                $ordrDtls->p_qty = $itm->qty;
+                $ordrDtls->p_sell_price = $itm->price;
+                $ordrDtls->is_discount = $tmpItmId->is_discount;
+                $ordrDtls->main_price = $tmpItmId->hasPrice[0]->price;
+                $ordrDtls->created_at = date('Y-m-d');
+                $ordrDtls->save();
+            }
+            Cart::destroy();
+        });
+
+        \Session::flash('success', 'Thank You For Using Our Service.');
+        return Redirect::to('/cart');
+    }
 }

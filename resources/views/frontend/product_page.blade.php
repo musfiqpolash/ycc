@@ -56,9 +56,9 @@
                                 <p>
                                     @if($val->is_discount==1)
                                         <i>${{$val->hasPrice[0]->price}} </i>&nbsp;
-                                        ${{$val->discount_price}}
+                                        <span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$val->discount_price}}
                                     @else
-                                        ${{$val->hasPrice[0]->price}}
+                                        <span><img class="taka" src="{{ url('public/images/taka.png') }}" alt="taka"></span>{{$val->hasPrice[0]->price}}
                                     @endif
                                 </p>
                             </div>
